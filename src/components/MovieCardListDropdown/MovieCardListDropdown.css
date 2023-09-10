@@ -1,0 +1,24 @@
+.cards__button {
+  color: #FFF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  width: 320px;
+  border: none;
+  background-color: #2F2F2F;
+  border-radius: 9px;
+  padding: 11px 0 9px;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 70px;
+  cursor: pointer;
+}
+
+.cards__button:hover {
+  opacity: .8;
+  transition: 0.7s ease;
+}

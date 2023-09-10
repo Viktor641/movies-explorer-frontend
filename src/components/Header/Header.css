@@ -10,7 +10,7 @@
   background-clip: content-box;
 }
 
-.header__image {
+.header__icon {
   width: 38px;
   height: 38px;
   margin-right: 45px;
@@ -20,6 +20,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
 }
 
 .header__navigation {
@@ -40,6 +41,11 @@
   line-height: 18px;
   text-decoration: none;
   margin-right: 16px;
+}
+
+.hover:hover {
+  opacity: .8;
+  transition: 0.7s ease;
 }
 
 .header__sign-up {
@@ -73,4 +79,38 @@
   border-radius: 3px;
   margin-left: 30px;
   cursor: pointer;
+}
+
+.header__container-account {
+  display: flex;
+  align-items: center;
+}
+
+.header__account {
+  color: #FFF;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.header__cover {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #313131;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 7px;
+  margin-right: 4px;
+}
+
+.header__account-icon {
+  width: 10.383px;
+  height: 10.669px;
 }
