@@ -34,9 +34,7 @@
 .header__text {
   color: #FFF;
   text-align: right;
-  font-family: Inter;
   font-size: 13px;
-  font-style: normal;
   font-weight: 400;
   line-height: 18px;
   text-decoration: none;
@@ -51,9 +49,7 @@
 .header__sign-up {
   color: #FFF;
   text-align: right;
-  font-family: Inter;
   font-size: 12px;
-  font-style: normal;
   font-weight: 500;
   line-height: 16px;
   width: 77px;
@@ -66,9 +62,7 @@
 
 .header__sign-in {
   color: #000;
-  font-family: Inter;
   font-size: 12px;
-  font-style: normal;
   font-weight: 500;
   line-height: 16px;
   width: 76px;
@@ -89,9 +83,7 @@
 .header__account {
   color: #FFF;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
   font-size: 13px;
-  font-style: normal;
   font-weight: 500;
   line-height: 12px;
   cursor: pointer;

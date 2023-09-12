@@ -19,9 +19,7 @@
 
 .aboutProject__content_title {
   color: #FFF;
-  font-family: Inter;
   font-size: 20px;
-  font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.8px;
@@ -30,9 +28,7 @@
 
 .aboutProject__content_paragraph {
   color: #FFF;
-  font-family: Inter;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
   line-height: 20px;
   margin: 0;
@@ -45,9 +41,7 @@
 
 .aboutProject__description_title {
   color: #FFF;
-  font-family: Inter;
   font-size: 20px;
-  font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.8px;
@@ -56,9 +50,7 @@
 
 .aboutProject__description_paragraph {
   color: #FFF;
-  font-family: Inter;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
   line-height: 20px;
   margin: 0;
@@ -78,9 +70,7 @@
 .aboutProject__text-back {
   color: #000;
   text-align: center;
-  font-family: Inter;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
   line-height: normal;
   flex-basis: 20%;
@@ -100,9 +90,7 @@
 .aboutProject__text-front {
   color: #FFF;
   text-align: center;
-  font-family: Inter;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
   line-height: normal;
   flex-basis: 80%;
@@ -122,10 +110,7 @@
 .aboutProject__span {
   color: #8B8B8B;
   text-align: center;
-  font-family: Inter;
   font-size: 14px;
-  font-style: normal;
   font-weight: 500;
   line-height: 17px;
-  /* 121.429% */
 }

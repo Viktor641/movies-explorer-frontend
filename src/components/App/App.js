@@ -5,6 +5,8 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Profile from '../Profile/Profile';
+import NotFound from '../NotFound/NotFound';
 
 function App() {
   return (
@@ -13,7 +15,13 @@ function App() {
         <Routes>
           <Route path='/' element={
             <>
-              <Header text="" textSave="" backgroundColor="#073042" signUp="Регистрация" signIn="Войти" />
+              <Header
+                text=""
+                textSave=""
+                backgroundColor="#073042"
+                signUp="Регистрация"
+                signIn="Войти"
+              />
               <Main />
               <Footer />
             </>
@@ -21,7 +29,15 @@ function App() {
           />
           <Route path='/movies' element={
             <>
-              <Header text="Фильмы" textSave="Сохранённые фильмы" backgroundColor="#202020" linkText="/movies" linkTextSave="/saved-movies" />
+              <Header
+                text="Фильмы"
+                textSave="Сохранённые фильмы"
+                backgroundColor="#202020"
+                linkText="/movies"
+                linkTextSave="/saved-movies"
+                iconLink="/"
+                linkProfile="/profile"
+              />
               <Movies />
               <Footer />
             </>
@@ -29,9 +45,38 @@ function App() {
           />
           <Route path='/saved-movies' element={
             <>
-              <Header text="Фильмы" textSave="Сохранённые фильмы" backgroundColor="#202020" linkText="/movies" linkTextSave="/saved-movies" />
+              <Header
+                text="Фильмы"
+                textSave="Сохранённые фильмы"
+                backgroundColor="#202020"
+                linkText="/movies"
+                linkTextSave="/saved-movies"
+                iconLink="/"
+                linkProfile="/profile"
+              />
               <SavedMovies />
               <Footer />
+            </>
+          }
+          />
+          <Route path='/profile' element={
+            <>
+              <Header
+                text="Фильмы"
+                textSave="Сохранённые фильмы"
+                backgroundColor="#202020"
+                linkText="/movies"
+                linkTextSave="/saved-movies"
+                iconLink="/"
+                linkProfile="/profile"
+              />
+              <Profile />
+            </>
+          }
+          />
+          <Route path="*" element={
+            <>
+              <NotFound />
             </>
           }
           />

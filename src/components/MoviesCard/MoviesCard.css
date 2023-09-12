@@ -18,9 +18,7 @@
 
 .card__paragraph {
   color: #FFF;
-  font-family: Inter;
   font-size: 13px;
-  font-style: normal;
   font-weight: 500;
   line-height: normal;
   margin: 0;
@@ -75,9 +73,7 @@
 
 .card__time {
   color: #8B8B8B;
-  font-family: Inter;
   font-size: 11px;
-  font-style: normal;
   font-weight: 400;
   line-height: normal;
   margin: 0;
