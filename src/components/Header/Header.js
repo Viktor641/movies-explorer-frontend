@@ -21,8 +21,8 @@ function Header(props) {
           <div>
             {location.pathname === '/' ? (
               <>
-                <button className='header__sign-up' type="button">{props.signUp}</button>
-                <button style={{ backgroundColor: `${props.backgroundColorSignIn}` }} className='header__sign-in' type="button">{props.signIn}</button>
+                <Link to={props.linkSignUp} className='header__sign-up' type="button">{props.signUp}</Link>
+                <Link to={props.linkSignIn} style={{ backgroundColor: `${props.backgroundColorSignIn}` }} className='header__sign-in' type="button">{props.signIn}</Link>
               </>
             ) :
               <div className='header__container-account'>
