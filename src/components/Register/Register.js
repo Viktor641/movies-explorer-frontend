@@ -16,7 +16,7 @@ function Register() {
           className="register__input"
           type="text"
           id='name'
-          value="Виталий"
+          defaultValue="Виталий"
           required
         />
         <label className='register__label' htmlFor="email">E-mail</label>
@@ -24,7 +24,7 @@ function Register() {
           className="register__input"
           type="email"
           id='email'
-          value="pochta@yandex.ru|"
+          defaultValue="pochta@yandex.ru|"
           required
         />
         <label className='register__label' htmlFor="password">Пароль</label>
@@ -32,7 +32,7 @@ function Register() {
           className="register__input"
           type="password"
           id='password'
-          value="••••••••••••••"
+          defaultValue="••••••••••••••"
           required
         />
         <span className='register__error'>Что-то пошло не так...</span>
