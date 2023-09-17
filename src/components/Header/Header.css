@@ -1,5 +1,5 @@
 .header {
-  padding: 19px 0;
+  padding: 16px 0;
 }
 
 .header__content {
@@ -105,4 +105,60 @@
 .header__account-icon {
   width: 10.383px;
   height: 10.669px;
+}
+
+.header__menu {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 17px 0;
+  }
+
+  .header__navigation {
+    visibility: hidden;
+  }
+
+  .header__content {
+    width: calc(100% - 60px);
+  }
+
+  .header__menu {
+    display: flex;
+    flex-direction: column;
+    padding: 11px 8px;
+    width: 28px;
+  }
+
+  .header__line {
+    height: 3px;
+    background-color: #FFF;
+    margin-bottom: 6px;
+  }
+
+  .header__line:last-child {
+    margin-bottom: 0;
+  }
+
+  .header__rap {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .header__content {
+    width: calc(100% - 28px);
+  }
+
+  .header__sign-up {
+    font-size: 10px;
+  }
+
+  .header__sign-in {
+    width: 54px;
+    font-size: 10px;
+    padding: 5px 0;
+    margin-left: 14px;
+  }
 }

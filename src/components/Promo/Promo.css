@@ -1,7 +1,5 @@
 .promo {
   background: #073042;
-  max-width: 100%;
-  min-height: 560px;
   display: flex;
   justify-content: center;
 }
@@ -9,12 +7,12 @@
 .promo__container {
   display: flex;
   flex-direction: column;
-  margin-left: 70px;
-  margin-right: 70px
+  width: calc(100% - 140px);
+  margin: 0 auto;
 }
 
 .promo__text {
-  width: 626px;
+  max-width: 626px;
   color: #FFF;
   font-size: 40px;
   font-weight: 400;
@@ -27,5 +25,43 @@
 .promo__image {
   width: 722px;
   height: 244px;
-  margin-left: 418px;
+  margin-left: auto;
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 868px) {
+  .promo {
+    overflow: hidden;
+  }
+
+  .promo__container {
+    width: 100%
+  }
+
+  .promo__text {
+    margin: 297px auto 138px;
+    text-align: center;
+  }
+
+  .promo__image {
+    width: 680px;
+    height: 230px;
+    object-fit: cover;
+    object-position: center;
+    margin: 0 auto 70px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .promo__text {
+    margin: 183px auto 60px;
+    font-size: 31px;
+    line-height: 39px;
+    letter-spacing: -1.24px;
+  }
+
+  .promo__image {
+    transform: translateX(-27%);
+    margin-bottom: 40px;
+  }
 }

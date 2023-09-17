@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #2F2F2F;
+  border-bottom-right-radius: 9px;
+  border-top-right-radius: 9px;
 }
 
 .filter__line {
@@ -60,4 +63,35 @@
 
 .filter__checkbox:checked+.filter__slider::before {
   transform: translateX(16px);
+}
+
+@media screen and (max-width: 768px) {
+  .filter__line {
+    width: 20px;
+  }
+
+  .filter__films {
+    margin-right: 20px;
+  }
+}
+
+
+@media screen and (max-width: 668px) {
+  .filter__line {
+    display: none;
+  }
+
+  .filter__toggle {
+    background-color: inherit;
+  }
+
+  .filter__films {
+    font-size: 11px;
+    margin-right: 2px;
+    margin-top: 47px;
+  }
+
+  .filter__label {
+    margin-top: 18px;
+  }
 }

@@ -3,7 +3,7 @@ import React from 'react';
 
 function NavTab(props) {
   return (
-    <h2 className='NavTab'>{props.title}</h2>
+    <h2 className='navTab'>{props.title}</h2>
   )
 }
 

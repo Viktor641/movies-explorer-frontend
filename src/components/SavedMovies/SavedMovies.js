@@ -11,12 +11,16 @@ function SavedMovies() {
   return (
     <section className='saved-movies'>
       <SearchForm />
-      <div className='cards-saved'>
+      <div className='saved-movies__cards'>
         <MoviesCard title='33 слова о дизайне' image={picure1} />
         <MoviesCard title='Киноальманах «100 лет дизайна»' image={picure2} />
         <MoviesCard title='В погоне за Бенкси' image={picure3} />
       </div>
-        <MovieCardListDropdown style={{ display: 'none' }} />
+      <div className='saved-movies__mobile'>
+        <MoviesCard title='33 слова о дизайне' image={picure1} />
+        <MoviesCard title='Киноальманах «100 лет дизайна»' image={picure2} />
+      </div>
+        <MovieCardListDropdown style={{ visibility: 'hidden' }} />
     </section>
   )
 }

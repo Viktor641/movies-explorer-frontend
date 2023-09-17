@@ -18,7 +18,7 @@ function Header(props) {
             <li><Link to={props.linkText} className='header__text hover'>{props.text}</Link></li>
             <li><Link to={props.linkTextSave} className='header__text hover'>{props.textSave}</Link></li>
           </ul>
-          <div>
+          <div className='header__rap'>
             {location.pathname === '/' ? (
               <>
                 <Link to={props.linkSignUp} className='header__sign-up' type="button">{props.signUp}</Link>
@@ -32,6 +32,11 @@ function Header(props) {
                 </Link>
               </div>
             }
+          </div>
+          <div className='header__menu'>
+            <span className='header__line'></span>
+            <span className='header__line'></span>
+            <span className='header__line'></span>
           </div>
         </div>
       </div>

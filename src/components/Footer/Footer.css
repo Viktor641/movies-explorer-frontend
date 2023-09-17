@@ -28,9 +28,7 @@
 .footer__date {
   color: #FFF;
   font-feature-settings: 'clig' off, 'liga' off;
-  
   font-size: 13px;
-  
   font-weight: 400;
   line-height: normal;
   margin: 0;
@@ -44,11 +42,47 @@
   color: #FFF;
   text-align: right;
   font-feature-settings: 'clig' off, 'liga' off;
-  
   font-size: 13px;
-  
   font-weight: 400;
   line-height: normal;
   margin: 0;
   margin-left: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    width: calc(100% - 60px);
+    padding-top: 60px;
+  }
+}
+
+@media screen and (max-width: 455px) {
+  .footer {
+    width: calc(100% - 20px);
+    padding-top: 41px;
+  }
+
+  .footer__text {
+    font-size: 12px;
+    padding-bottom: 21px;
+  }
+
+  .footer__copyright {
+    flex-direction: column-reverse;
+  }
+
+  .footer__date {
+    font-size: 12px;
+    margin-top: 30px;
+  }
+
+  .footer__container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__paragraph {
+    font-size: 12px;
+    margin: 12px 0 0;
+  }
 }
