@@ -1,7 +1,7 @@
 .profile {
   display: flex;
   flex-direction: column;
-  width: calc(100% - 870px);
+  max-width: 410px;
   margin: 0 auto;
 }
 
@@ -12,7 +12,7 @@
   font-weight: 500;
   line-height: normal;
   margin: 0;
-  margin-top: 68px;
+  margin-top: 74px;
 }
 
 .profile__name {
@@ -73,4 +73,77 @@
 .hover:hover {
   opacity: .8;
   transition: 0.7s ease
+}
+
+.profile__save {
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  background-color: #4285F4;
+  border: none;
+  border-radius: 3px;
+  max-width: 396px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.profile__save:disabled {
+  background-color: #F8F8F8;
+  color: #FF004C;
+  opacity: 0.3;
+}
+
+.profile__error {
+  color: #FF004C;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__title {
+    margin-top: 233px;
+  }
+
+  .profile__name {
+    margin-top: 95px;
+  }
+
+  .profile__email {
+    margin-bottom: 209px;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .profile {
+    max-width: 260px;
+  }
+
+  .profile__title {
+    margin-top: 68px;
+  }
+
+  .profile__name {
+    margin-top: 79px;
+  }
+
+  .profile__email {
+    margin-bottom: 378px;
+  }
+
+  .profile__change {
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+
+  .profile__sign-out {
+    font-size: 12px;
+  }
+
+  .profile__save {
+    font-size: 12px;
+  }
 }

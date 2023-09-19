@@ -18,8 +18,6 @@ function App() {
           <Route path='/' element={
             <>
               <Header
-                text=""
-                textSave=""
                 backgroundColor="#073042"
                 signUp="Регистрация"
                 signIn="Войти"
@@ -34,11 +32,7 @@ function App() {
           <Route path='/movies' element={
             <>
               <Header
-                text="Фильмы"
-                textSave="Сохранённые фильмы"
                 backgroundColor="#202020"
-                linkText="/movies"
-                linkTextSave="/saved-movies"
                 iconLink="/"
                 linkProfile="/profile"
               />
@@ -50,11 +44,7 @@ function App() {
           <Route path='/saved-movies' element={
             <>
               <Header
-                text="Фильмы"
-                textSave="Сохранённые фильмы"
                 backgroundColor="#202020"
-                linkText="/movies"
-                linkTextSave="/saved-movies"
                 iconLink="/"
                 linkProfile="/profile"
               />
@@ -66,11 +56,7 @@ function App() {
           <Route path='/profile' element={
             <>
               <Header
-                text="Фильмы"
-                textSave="Сохранённые фильмы"
                 backgroundColor="#202020"
-                linkText="/movies"
-                linkTextSave="/saved-movies"
                 iconLink="/"
                 linkProfile="/profile"
               />
