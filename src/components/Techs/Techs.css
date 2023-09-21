@@ -66,7 +66,6 @@
 
   .techs__title {
     margin: 15px auto 22px;
-    font-size: 30px;
   }
 
   .techs__subtitle {
@@ -112,7 +111,6 @@
   .techs__list {
     flex-wrap: wrap;
     width: calc(100% - 132px);
-    justify-content: flex-start;
   }
 
   .techs__list-info {

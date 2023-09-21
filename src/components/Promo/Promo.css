@@ -25,15 +25,14 @@
 .promo__image {
   width: 722px;
   height: 244px;
+  background-image: url('../../images/PromoLogo.svg');
+  background-position: center;
+  background-repeat: no-repeat;
   margin-left: auto;
   margin-bottom: 60px;
 }
 
 @media screen and (max-width: 868px) {
-  .promo {
-    overflow: hidden;
-  }
-
   .promo__container {
     width: 100%
   }
@@ -44,8 +43,12 @@
   }
 
   .promo__image {
-    width: 680px;
+    width: 100%;
+    max-width: 680px;
     height: 230px;
+    background-image: url('../../images/PromoLogoTablet.svg');
+    background-position: center;
+    background-repeat: no-repeat;
     object-fit: cover;
     object-position: center;
     margin: 0 auto 70px;
@@ -54,14 +57,17 @@
 
 @media screen and (max-width: 540px) {
   .promo__text {
-    margin: 183px auto 60px;
+    margin: 180px auto 60px;
     font-size: 31px;
     line-height: 39px;
     letter-spacing: -1.24px;
   }
 
+  .promo__container {
+    position: relative;
+  }
+
   .promo__image {
-    transform: translateX(-27%);
     margin-bottom: 40px;
   }
 }

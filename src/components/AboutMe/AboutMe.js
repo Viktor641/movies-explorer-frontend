@@ -15,7 +15,7 @@ function AboutMe() {
             и&nbsp;дочь. Я&nbsp;люблю слушать музыку, а&nbsp;ещё увлекаюсь бегом. Недавно начал кодить.&nbsp;С&nbsp; 2015 года работал в&nbsp;компании &laquo;СКБ Контур&raquo;. После того, как прошёл курс по&nbsp;веб-разработке, начал заниматься фриланс-заказами и&nbsp;ушёл с&nbsp;постоянной работы.</p>
           <a target="_blank" href="https://github.com/Viktor641" className="aboutMe__link" rel="noreferrer">Github</a>
         </div>
-        <img className='aboutMe__image' src={studentImage} alt='студент'></img>
+        <img className='aboutMe__image' src={studentImage} alt='фотография студента'></img>
       </div>
     </section>
   )

@@ -15,11 +15,11 @@ function MoviesCard(props) {
     <div className="card">
       <img
         src={props.image}
-        alt='картинка'
+        alt={props.title}
         className="card__image"
       />
       <div className="card__container">
-        <p className="card__paragraph">{props.title}</p>
+        <h2 className="card__paragraph">{props.title}</h2>
         {location.pathname === '/saved-movies' ? (
           <button className='card__like-saved' type="button" ></button>
         ) :

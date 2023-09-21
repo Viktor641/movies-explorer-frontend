@@ -46,7 +46,7 @@
   }
 }
 
-@media screen and (max-width: 668px) {
+@media screen and (max-width: 658px) {
   .cards__mobile {
     display: grid;
     justify-items: center;

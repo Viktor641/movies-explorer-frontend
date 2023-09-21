@@ -3,13 +3,12 @@ import React from 'react';
 
 function FilterCheckbox() {
   return (
-    <div className='filter__toggle'>
-      <div className='filter__line'></div>
-      <label className='filter__label' aria-label="Короткометражки">
-        <input type="checkbox" className='filter__checkbox' />
-        <span className='filter__slider' />
+    <div className='search__toggle'>
+      <label className='search__label' aria-label="Короткометражки">
+        <input type="checkbox" className='search__checkbox' />
+        <span className='search__slider' />
       </label>
-      <p className='filter__films'>Короткометражки</p>
+      <p className='search__films'>Короткометражки</p>
     </div>
   )
 }

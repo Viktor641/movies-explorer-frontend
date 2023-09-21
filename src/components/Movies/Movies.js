@@ -7,14 +7,16 @@ import MovieCardListDropdown from '../MovieCardListDropdown/MovieCardListDropdow
 
 function Movies() {
   return (
-    <section className='movies'>
-      <div>
-        <SearchForm />
-      </div>
-      {/* <Preloader /> */}
-      <MoviesCardList />
-      <MovieCardListDropdown />
-    </section>
+    <main className='content'>
+      <section className='movies'>
+        <div>
+          <SearchForm />
+        </div>
+        {/* <Preloader /> */}
+        <MoviesCardList />
+        <MovieCardListDropdown />
+      </section>
+    </main>
   )
 }
 

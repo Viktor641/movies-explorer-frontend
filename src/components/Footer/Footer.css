@@ -22,7 +22,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
 }
 
 .footer__date {
@@ -36,9 +35,11 @@
 
 .footer__container {
   display: flex;
+  list-style-type: none;
+  margin-bottom: 20px;
 }
 
-.footer__paragraph {
+.footer__link {
   color: #FFF;
   text-align: right;
   font-feature-settings: 'clig' off, 'liga' off;
@@ -47,12 +48,13 @@
   line-height: normal;
   margin: 0;
   margin-left: 20px;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 768px) {
   .footer {
     width: calc(100% - 60px);
-    padding-top: 60px;
+    padding-top: 63px;
   }
 }
 
@@ -74,14 +76,26 @@
   .footer__date {
     font-size: 12px;
     margin-top: 30px;
+    padding-bottom: 20px;
   }
 
   .footer__container {
     flex-direction: column;
     align-items: center;
+    margin: 0;
+    margin-top: 29px;
+    padding: 0;
   }
 
-  .footer__paragraph {
+  .footer__nav-item {
+    margin-bottom: 8px;
+  }
+
+  .footer__nav-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .footer__link {
     font-size: 12px;
     margin: 12px 0 0;
   }

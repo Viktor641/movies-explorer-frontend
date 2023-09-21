@@ -5,20 +5,22 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm() {
   return (
-    <div className='search'>
+    <section className='search'>
       <form className='search__form'>
-        <img src={SearchIcon} alt='' className='search__icon'></img>
-        <input
-          className='search__input'
-          type="text"
-          placeholder="Фильм"
-        />
-        <div className='search__button-cover'>
-          <button className='search__button'>Найти</button>
+        <div className='search__container'>
+          <img src={SearchIcon} alt='поисковая лупа' className='search__icon'></img>
+          <input
+            className='search__input'
+            type="text"
+            placeholder="Фильм"
+          />
+          <div className='search__button-cover'>
+            <button type='submit' className='search__button'>Найти</button>
+          </div>
         </div>
+        <FilterCheckbox />
       </form>
-      <FilterCheckbox />
-    </div>
+    </section>
   )
 }
 

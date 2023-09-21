@@ -1,4 +1,4 @@
-.filter__toggle {
+.search__toggle {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,16 +7,7 @@
   border-top-right-radius: 9px;
 }
 
-.filter__line {
-  width: 40px;
-  height: 1px;
-  background-color: #424242;
-  transform: rotate(90deg);
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.filter__films {
+.search__films {
   color: #FFF;
   font-size: 13px;
   font-weight: 400;
@@ -24,7 +15,7 @@
   margin: 27px 30px 27px 14px;
 }
 
-.filter__label {
+.search__label {
   position: relative;
   display: inline-block;
   width: 36px;
@@ -32,11 +23,11 @@
   cursor: pointer;
 }
 
-.filter__checkbox {
+.search__checkbox {
   display: none;
 }
 
-.filter__slider {
+.search__slider {
   position: absolute;
   inset: 0;
   background-color: #343434;
@@ -45,7 +36,7 @@
   transform: scale(-1, -1);
 }
 
-.filter__slider::before {
+.search__slider::before {
   position: absolute;
   content: '';
   height: 14px;
@@ -57,41 +48,33 @@
   background-color: #2BE080;
 }
 
-.filter__checkbox:checked+.filter__slider {
+.search__checkbox:checked+.search__slider {
   background-color: #2BE080;
 }
 
-.filter__checkbox:checked+.filter__slider::before {
+.search__checkbox:checked+.search__slider::before {
   transform: translateX(16px);
 }
 
 @media screen and (max-width: 768px) {
-  .filter__line {
-    width: 20px;
-  }
-
-  .filter__films {
+  .search__films {
     margin-right: 20px;
   }
 }
 
 
-@media screen and (max-width: 668px) {
-  .filter__line {
-    display: none;
+@media screen and (max-width: 658px) {
+  .search__toggle {
+    background-color: #202020;
   }
 
-  .filter__toggle {
-    background-color: inherit;
-  }
-
-  .filter__films {
+  .search__films {
     font-size: 11px;
     margin-right: 2px;
     margin-top: 47px;
   }
 
-  .filter__label {
+  .search__label {
     margin-top: 18px;
   }
 }

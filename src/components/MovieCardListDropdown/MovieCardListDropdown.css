@@ -1,7 +1,6 @@
-.cards__button {
+.button-more {
   color: #FFF;
   text-align: center;
-  font-family: Inter;
   font-size: 12px;
   font-weight: 500;
   line-height: normal;
@@ -16,19 +15,19 @@
   cursor: pointer;
 }
 
-.cards__button:hover {
+.button-more:hover {
   opacity: .8;
   transition: 0.7s ease;
 }
 
 @media screen and (max-width: 968px) {
-  .cards__button {
+  .button-more {
     margin-bottom: 74px;
   }
 }
 
 @media screen and (max-width: 668px) {
-  .cards__button {
+  .button-more {
     margin-bottom: 117px;
     padding: 13px 0 10px;
     width: 240px;

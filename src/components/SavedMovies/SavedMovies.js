@@ -9,19 +9,21 @@ import MovieCardListDropdown from '../MovieCardListDropdown/MovieCardListDropdow
 
 function SavedMovies() {
   return (
-    <section className='saved-movies'>
-      <SearchForm />
-      <div className='saved-movies__cards'>
-        <MoviesCard title='33 слова о дизайне' image={picure1} />
-        <MoviesCard title='Киноальманах «100 лет дизайна»' image={picure2} />
-        <MoviesCard title='В погоне за Бенкси' image={picure3} />
-      </div>
-      <div className='saved-movies__mobile'>
-        <MoviesCard title='33 слова о дизайне' image={picure1} />
-        <MoviesCard title='Киноальманах «100 лет дизайна»' image={picure2} />
-      </div>
+    <main className='content'>
+      <section className='saved-movies'>
+        <SearchForm />
+        <div className='saved-movies__cards'>
+          <MoviesCard title='33 слова о дизайне' image={picure1} />
+          <MoviesCard title='Киноальманах «100 лет дизайна»' image={picure2} />
+          <MoviesCard title='В погоне за Бенкси' image={picure3} />
+        </div>
+        <div className='saved-movies__mobile'>
+          <MoviesCard title='33 слова о дизайне' image={picure1} />
+          <MoviesCard title='Киноальманах «100 лет дизайна»' image={picure2} />
+        </div>
         <MovieCardListDropdown style={{ visibility: 'hidden' }} />
-    </section>
+      </section>
+    </main>
   )
 }
 
