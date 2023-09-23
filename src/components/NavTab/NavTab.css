@@ -1,0 +1,27 @@
+.navTab {
+  color: #FFF;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  border-bottom: 1px solid rgba(218, 218, 218, 0.7);
+  padding-bottom: 23px;
+  width: calc(100% - 140px);
+  margin: 0 auto 65px;
+}
+
+@media screen and (max-width: 868px) {
+  .navTab {
+    width: calc(100% - 100px);
+  }
+}
+
+@media screen and (max-width: 655px) {
+  .navTab {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    width: calc(100% - 36px);
+    margin-bottom: 60px;
+    padding-bottom: 27px;
+  }
+}

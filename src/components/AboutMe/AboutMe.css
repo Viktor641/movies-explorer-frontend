@@ -1,0 +1,127 @@
+.aboutMe {
+  padding: 110px 0 100px;
+}
+
+.aboutMe__container {
+  display: flex;
+  padding: 0;
+  margin: 0 auto;
+  width: calc(100% - 140px);
+  justify-content: space-between;
+}
+
+.aboutMe__title {
+  color: #FFF;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+  margin: 0;
+  margin-bottom: 18px;
+}
+
+.aboutMe__subtitle {
+  color: #FFF;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0;
+  margin-bottom: 26px;
+}
+
+.aboutMe__paragraph {
+  color: #FFF;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0;
+  max-width: 600px;
+  margin-bottom: 99px;
+}
+
+.aboutMe__link {
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+}
+
+.aboutMe__image {
+  width: 270px;
+  height: 327px;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutMe {
+    padding: 88px 0 90px;
+  }
+
+  .aboutMe__container {
+    width: calc(100% - 100px);
+  }
+
+  .aboutMe__title {
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+  }
+
+  .aboutMe__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 20px;
+  }
+
+  .aboutMe__paragraph {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 87px;
+  }
+
+  .aboutMe__image {
+    width: 255px;
+    height: 307px;
+    margin-left: 51px;
+  }
+}
+
+@media screen and (max-width: 655px) {
+  .aboutMe {
+    padding: 72px 0 68px;
+  }
+
+  .aboutMe__container {
+    flex-direction: column-reverse;
+    align-items: center;
+    width: calc(100% - 28px);
+  }
+
+  .aboutMe__title {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
+    margin-bottom: 20px;
+    margin-top: 44px;
+  }
+
+  .aboutMe__subtitle {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 20px;
+  }
+
+  .aboutMe__paragraph {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 40px;
+  }
+
+  .aboutMe__image {
+    width: 292px;
+    height: 352px;
+    margin-left: 0;
+  }
+}

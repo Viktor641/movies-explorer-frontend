@@ -1,0 +1,23 @@
+.movies {
+  margin: 0 auto;
+  width: calc(100% - 140px);
+}
+
+
+@media screen and (max-width: 968px) {
+  .movies {
+    width: calc(100% - 80px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .movies {
+    width: calc(100% - 60px);
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .movies {
+    width: calc(100% - 20px);
+  }
+}

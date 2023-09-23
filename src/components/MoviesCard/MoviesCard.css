@@ -1,0 +1,106 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card__image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.card__container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.card__paragraph {
+  color: #FFF;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+  width: 226px;
+  height: 32px;
+}
+
+.card__like {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #313131;
+  background-image: url('../../images/save1.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+}
+
+.card__like {
+  opacity: 0.8;
+}
+
+.card__like-saved {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #313131;
+  background-image: url('../../images/save1.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}
+
+.card__like-saved:hover {
+  cursor: pointer;
+  background-image: url('../../images/iconLikeCross.svg');
+  opacity: 0.8;
+}
+
+.card__like_active {
+  background-image: url('../../images/likeDisable.svg');
+  transition: 0.3s ease;
+  opacity: 0.8;
+}
+
+.card__like_disable {
+  background-image: url('../../images/save1.svg');
+  transition: 0.3s ease;
+  opacity: 0.8;
+}
+
+.card__time {
+  color: #8B8B8B;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  border-top: 1px solid rgba(66, 66, 66);
+  padding-top: 6px;
+}
+
+@media screen and (max-width: 868px) {
+  .card__paragraph {
+    width: 295px;
+    height: 16px;
+  }
+
+  .card__container {
+    margin-bottom: 25px;
+  }
+}
+
+@media screen and (max-width: 668px) {
+  .card__paragraph {
+    width: 240px;
+    height: 15px;
+    font-size: 12px;
+  }
+
+  .card__time {
+    font-size: 10px;
+  }
+}
