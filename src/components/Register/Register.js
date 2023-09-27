@@ -1,9 +1,30 @@
 import './Register.css';
-import React from 'react';
+import React, { useState } from 'react';
 import headerLogo from '../../images/headerLogo.svg';
 import { Link } from 'react-router-dom';
 
-function Register() {
+function Register(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
+  function handleEmailChange(evt) {
+    setEmail(evt.target.value);
+  }
+
+  function handleNameChange(evt) {
+    setName(evt.target.value);
+  }
+
+  function handlePasswordChange(evt) {
+    setPassword(evt.target.value);
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    props.onRegister(name, email, password);
+  }
+  
   return (
     <main className='content'>
       <section className='register'>
@@ -11,13 +32,13 @@ function Register() {
           <img className='register__logo' src={headerLogo} alt='логотип проекта' ></img>
         </Link>
         <h1 className='register__title'>Добро пожаловать!</h1>
-        <form className='register__form'>
+        <form className='register__form' onSubmit={handleSubmit}>
           <label className='register__label' htmlFor='name'>Имя</label>
           <input
             className="register__input"
             type="text"
             id='name'
-            defaultValue="Виталий"
+            onChange={handleNameChange}
             required
           />
           <label className='register__label' htmlFor="email">E-mail</label>
@@ -25,7 +46,7 @@ function Register() {
             className="register__input"
             type="email"
             id='email'
-            defaultValue="pochta@yandex.ru|"
+            onChange={handleEmailChange}
             required
           />
           <label className='register__label' htmlFor="password">Пароль</label>
@@ -33,7 +54,7 @@ function Register() {
             className="register__input"
             type="password"
             id='password'
-            defaultValue="••••••••••••••"
+            onChange={handlePasswordChange}
             required
           />
           <span className='register__error'>Что-то пошло не так...</span>

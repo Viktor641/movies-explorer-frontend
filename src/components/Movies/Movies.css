@@ -3,6 +3,11 @@
   width: calc(100% - 140px);
 }
 
+.movies__error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 @media screen and (max-width: 968px) {
   .movies {

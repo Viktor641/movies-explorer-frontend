@@ -1,19 +1,25 @@
 import './Movies.css';
-import React from 'react';
+import React, { useState } from 'react';
 // import Preloader from '../Preloader/Preloader';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MovieCardListDropdown from '../MovieCardListDropdown/MovieCardListDropdown';
 
-function Movies() {
+function Movies(props) {
+  const [filterCards, setFilterCards] = useState([]);
+
+  function filterData(filterData) {
+    setFilterCards(filterData);
+  }
+
   return (
     <main className='content'>
       <section className='movies'>
         <div>
-          <SearchForm />
+          <SearchForm cards={props.cards} filterCards={filterData}/>
         </div>
-        {/* <Preloader /> */}
-        <MoviesCardList />
+ 
+        <MoviesCardList cards={filterCards} />
         <MovieCardListDropdown />
       </section>
     </main>

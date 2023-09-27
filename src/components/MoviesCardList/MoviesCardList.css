@@ -69,3 +69,29 @@
     display: none;
   }
 }
+
+.cards {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  margin: 0 auto;
+  width: 100%;
+  column-gap: 20px;
+  row-gap: 38px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: 69px;
+  margin-bottom: 59px;
+  border-top: 1px solid rgba(66, 66, 66);
+  padding-top: 80px;
+  height: 1114px;
+  overflow-y: hidden;
+}
+
+.cards__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
