@@ -16,10 +16,17 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import apiMovies from "../../utils/MoviesApi";
 import MainApi from "../../utils/MainApi";
 import Preloader from '../Preloader/Preloader';
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import failure from "../../images/failureIcon.jpg";
+import success from "../../images/SuccessIcon.jpg";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [cards, setCards] = useState([]);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
+  const [infoTooltipIcon, setInfoTooltipIcon] = useState('');
+  const [infoTooltipText, setInfoTooltipText] = useState('');
 
   const navigate = useNavigate();
 
@@ -31,20 +38,26 @@ function App() {
         navigate("/movies");
       })
       .catch(() => {
-        console.error()
+        setInfoTooltipIcon(failure);
+        setInfoTooltipText("Что-то пошло не так! Попробуйте ещё раз.");
+        handleInfoTooltip();
       })
   }
 
   function onRegister(name, email, password) {
     auth.register(name, email, password)
       .then((res) => {
-        localStorage.setItem('userName', res.name);
-        localStorage.setItem('userEmail', res.email);
+        setInfoTooltipIcon(success);
+        setInfoTooltipText("Вы успешно зарегистрировались!");
+        setCurrentUser(res);
+        console.log(currentUser);
         navigate("/signin");
       })
-      .catch(() => {
-        console.error()
+      .catch((err) => {
+        setInfoTooltipIcon(failure);
+        setInfoTooltipText(`Что-то пошло не так! ${err}`);
       })
+      .finally(handleInfoTooltip)
   }
 
   useEffect(() => {
@@ -63,10 +76,10 @@ function App() {
 
   function onSignOut() {
     localStorage.removeItem("jwt");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userEmail");
+    localStorage.removeItem("filterData");
     setLoggedIn(false);
   }
+
 
   useEffect(() => {
     MainApi.getUserData()
@@ -79,16 +92,20 @@ function App() {
       })
   }, []);
 
+
   function handleUpdateProfileUser(profileData) {
     MainApi.sendUserData(profileData)
       .then((user) => {
+        setInfoTooltipIcon(success);
+        setInfoTooltipText("Вы успешно обновили профиль!");
         setCurrentUser(user);
       })
-      .catch(console.error)
+      .catch(() => {
+        setInfoTooltipIcon(failure);
+        setInfoTooltipText(`При обновлении профиля произошла ошибка.`);
+      })
+      .finally(handleInfoTooltip)
   }
-
-
-  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     apiMovies.getCards()
@@ -98,6 +115,30 @@ function App() {
       })
       .catch(console.error)
   }, [])
+
+  function handleInfoTooltip() {
+    setIsInfoTooltipPopupOpen(true);
+  }
+
+  function closeInfoTooltipPopup() {
+    setIsInfoTooltipPopupOpen(false);
+  }
+
+  const isOpen = isInfoTooltipPopupOpen;
+
+  useEffect(() => {
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape') {
+        closeInfoTooltipPopup();
+      }
+    }
+    if (isOpen) {
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+    }
+  }, [isOpen])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -189,6 +230,12 @@ function App() {
             }
             />
           </Routes>
+          <InfoTooltip
+            icon={infoTooltipIcon}
+            text={infoTooltipText}
+            isOpen={isInfoTooltipPopupOpen}
+            onClose={closeInfoTooltipPopup}
+          />
         </div>
       </div>
     </CurrentUserContext.Provider>

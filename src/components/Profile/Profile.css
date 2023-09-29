@@ -45,6 +45,11 @@
   justify-content: space-between;
 }
 
+.profile__input:focus {
+  border-color: #0078d4;
+  box-shadow: 0 0 8px #0078d4;
+}
+
 .profile__container {
   display: flex;
   flex-direction: column;
