@@ -6,6 +6,7 @@ import Preloader from '../Preloader/Preloader';
 
 function MoviesCardList(props) {
   const adressFilms = 'https://api.nomoreparties.co/';
+  const filterData = localStorage.getItem('filterData');
   
   return (
     <section className={props.cards.length === 0 ? 'cards__container' : 'cards'}>

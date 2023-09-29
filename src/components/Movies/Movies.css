@@ -9,6 +9,13 @@
   align-items: center;
 }
 
+.movies__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
 @media screen and (max-width: 968px) {
   .movies {
     width: calc(100% - 80px);

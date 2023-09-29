@@ -13,9 +13,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import * as auth from '../../utils/auth.js'
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import apiMovies from "../../utils/MoviesApi";
 import MainApi from "../../utils/MainApi";
-import Preloader from '../Preloader/Preloader';
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import failure from "../../images/failureIcon.jpg";
 import success from "../../images/SuccessIcon.jpg";
@@ -23,7 +21,6 @@ import success from "../../images/SuccessIcon.jpg";
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [cards, setCards] = useState([]);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
   const [infoTooltipIcon, setInfoTooltipIcon] = useState('');
   const [infoTooltipText, setInfoTooltipText] = useState('');
@@ -107,14 +104,7 @@ function App() {
       .finally(handleInfoTooltip)
   }
 
-  useEffect(() => {
-    apiMovies.getCards()
-      .then((cards) => {
-        <Preloader />
-        setCards(cards)
-      })
-      .catch(console.error)
-  }, [])
+  
 
   function handleInfoTooltip() {
     setIsInfoTooltipPopupOpen(true);
@@ -167,12 +157,10 @@ function App() {
                   iconLink="/"
                   linkProfile="/profile"
                   loggedIn={loggedIn}
-
-                />
+                  />
                 <ProtectedRoute
                   element={Movies}
                   loggedIn={loggedIn}
-                  cards={cards}
                 />
                 <Footer />
               </>

@@ -34,7 +34,19 @@ export class Api {
     })
       .then(res => { return this._checkResponse(res); })
   }
+
+  createMovie() {
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this._baseUrl}/movies`, {
+      headers: {
+        authorization: `Bearer ${token}`
+      },
+      method: 'POST',
+    })
+      .then(res => { return this._checkResponse(res); })
+  }
 }
+
 
 const MainApi = new Api({
   baseUrl: 'https://api.sudarkinvmovies.nomoredomainsicu.ru',
