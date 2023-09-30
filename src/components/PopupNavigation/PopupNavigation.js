@@ -7,8 +7,8 @@ import AccountIcon from '../../images/AccountIcon.svg';
 function PopupNavigation(props) {
   return (
     <div className='popup__cover'>
-      <div className='popup popup_opened'>
-        <button type="button" className='popup__close' onClick={props.onClose}></button>
+      <div className='popup-burger popup-burger_opened'>
+        <button type="button" className='popup-burger__close' onClick={props.onClose}></button>
         <ul className='popup__navigation'>
           <li className='popup__navigation-item'>
             <Link to={props.linkMain} className='header__text header__text_popup hover' onClick={props.onClose}>{props.title}</Link>

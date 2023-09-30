@@ -5,12 +5,21 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
   const [film, setFilm] = useState('');
+  const [shortFilm, setShortFilm] = useState(false);
+  const [error, setError] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    const filterData = props.cards.filter(({ nameRU }) =>
-      nameRU.toLowerCase().includes(film.toLowerCase())
+    if (!film.trim()) {
+      setError('Нужно ввести ключевое слово');
+      return;
+    }
+
+    setError('');
+
+    const filterData = props.cards.filter(({ nameRU, nameEN, duration }) =>
+      (nameRU.toLowerCase().includes(film.toLowerCase()) || nameEN.toLowerCase().includes(film.toLowerCase())) && (!shortFilm || duration <= 40)
     );
 
     props.filterCards(filterData);
@@ -19,6 +28,11 @@ function SearchForm(props) {
 
   function handleFilmChange(evt) {
     setFilm(evt.target.value);
+    setError('');
+  }
+
+  function handleCheckboxChange(checked) {
+    setShortFilm(checked);
   }
 
   return (
@@ -29,7 +43,7 @@ function SearchForm(props) {
           <input
             className='search__input'
             type="text"
-            placeholder="Фильм"
+            placeholder={error || "Фильм"}
             value={film || ''}
             onChange={handleFilmChange}
           />
@@ -37,7 +51,7 @@ function SearchForm(props) {
             <button type='submit' className='search__button'>Найти</button>
           </div>
         </div>
-        <FilterCheckbox />
+        <FilterCheckbox onCheckboxChange={handleCheckboxChange} />
       </form>
     </section>
   )

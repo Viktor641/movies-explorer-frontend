@@ -6,14 +6,14 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MovieCardListDropdown from '../MovieCardListDropdown/MovieCardListDropdown';
 
-function Movies() {
+function Movies(props) {
   const [cards, setCards] = useState([]);
   const [filterCards, setFilterCards] = useState([]);
 
-  const [infoMovieText, setInfoMovieText] = useState('');
+  const [errorMovie, setErrorMovie] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const [visibleCards, setVisibleCards] = useState(16);
+  const [visibleCards, setVisibleCards] = useState(0);
 
   function filterData(filterData) {
     setFilterCards(filterData);
@@ -29,7 +29,7 @@ function Movies() {
       })
       .catch(() => {
         setIsLoading(false);
-        setInfoMovieText(`Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз`);
+        setErrorMovie(`Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз`);
       })
   }, [filterCards])
 
@@ -77,6 +77,15 @@ function Movies() {
     };
   }, []);
 
+  useEffect(() => {
+    const localStorageMovies = localStorage.getItem('filterData');
+    if (localStorageMovies) {
+      const filteredMovies = JSON.parse(localStorageMovies);
+      setCards(filteredMovies);
+      setFilterCards(filteredMovies);
+    }
+  }, []);
+
   return (
     <main className='content'>
       <section className='movies'>
@@ -89,7 +98,11 @@ function Movies() {
             <Preloader />
           </div>
         ) : (
-          <MoviesCardList cards={filterCards.slice(0, visibleCards)} textNotFound={infoMovieText} loading={isLoading} />
+          <MoviesCardList
+            cards={filterCards.slice(0, visibleCards)}
+            errorMovie={errorMovie}
+            loading={isLoading}
+          />
         )}
         {filterCards.length > visibleCards && (
           <MovieCardListDropdown handleLoadMore={handleLoadMore} />

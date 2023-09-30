@@ -47,7 +47,6 @@ function App() {
         setInfoTooltipIcon(success);
         setInfoTooltipText("Вы успешно зарегистрировались!");
         setCurrentUser(res);
-        console.log(currentUser);
         navigate("/signin");
       })
       .catch((err) => {
@@ -103,8 +102,6 @@ function App() {
       })
       .finally(handleInfoTooltip)
   }
-
-  
 
   function handleInfoTooltip() {
     setIsInfoTooltipPopupOpen(true);

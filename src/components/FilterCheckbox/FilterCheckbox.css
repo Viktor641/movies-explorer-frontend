@@ -33,7 +33,6 @@
   background-color: #343434;
   border-radius: 16px;
   transition: .4s;
-  transform: scale(-1, -1);
 }
 
 .search__slider::before {

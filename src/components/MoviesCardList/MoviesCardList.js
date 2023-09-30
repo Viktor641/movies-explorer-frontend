@@ -1,17 +1,14 @@
 import './MoviesCardList.css';
 import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import Preloader from '../Preloader/Preloader';
-
 
 function MoviesCardList(props) {
   const adressFilms = 'https://api.nomoreparties.co/';
-  const filterData = localStorage.getItem('filterData');
   
   return (
     <section className={props.cards.length === 0 ? 'cards__container' : 'cards'}>
       {props.cards.length === 0 ? (
-        <div className='cards__error'>Ничего не найдено</div>
+        <div className='cards__error'>{props.errorMovie || 'Ничего не найдено'}</div>
       ) : (
         props.cards.map((card) => (
           <MoviesCard

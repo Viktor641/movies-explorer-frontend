@@ -1,7 +1,7 @@
 import './Header.css';
 import headerLogo from '../../images/headerLogo.svg';
 import AccountIcon from '../../images/AccountIcon.svg';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import PopupNavigation from '../PopupNavigation/PopupNavigation';
@@ -16,6 +16,21 @@ function Header(props) {
   function closePopup() {
     setOpen(false);
   }
+
+  useEffect(() => {
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape') {
+        closePopup();
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+    }
+  }, [isOpen])
 
   return (
     <header style={{ backgroundColor: `${props.backgroundColor}` }} className='header'>

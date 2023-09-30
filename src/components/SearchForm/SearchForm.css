@@ -53,6 +53,11 @@
   line-height: 20px;
 }
 
+.search__input:focus {
+  border-color: #0078d4;
+  box-shadow: 0 0 8px #0078d4;
+}
+
 .search__button-cover {
   width: 58.65px;
   height: 34px;
@@ -76,6 +81,11 @@
   background-color: #4285F4;
   border: none;
   padding: 0;
+}
+
+.search__button:hover {
+  opacity: .8;
+  transition: 0.7s ease;
 }
 
 @media screen and (max-width: 868px) {
