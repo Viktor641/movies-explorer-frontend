@@ -13,9 +13,22 @@ function MoviesCardList(props) {
         props.cards.map((card) => (
           <MoviesCard
             key={card.id}
+            movie={card.id._id}
+            id={card.id}
+            country={card.country}
             link={`${adressFilms}${card.image.url}`}
             name={card.nameRU}
             duration={card.duration}
+            trailer={card.trailerLink}
+            nameEN={card.nameEN}
+            director={card.director}
+            year={card.year}
+            description={card.description}
+            thumbnail={`${adressFilms}${card.image.url}`}
+            movieId={card.id}
+            savedCards={props.savedCards}
+            onAddCardToSaved={props.onAddCardToSaved}
+            onRemoveCardFromSaved={props.onRemoveCardFromSaved}
           />
         ))
       )}

@@ -81,6 +81,7 @@
   background-color: #4285F4;
   border: none;
   padding: 0;
+  cursor: pointer;
 }
 
 .search__button:hover {

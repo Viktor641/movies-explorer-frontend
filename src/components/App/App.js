@@ -73,6 +73,11 @@ function App() {
   function onSignOut() {
     localStorage.removeItem("jwt");
     localStorage.removeItem("filterData");
+    localStorage.removeItem("isChecked");
+    for (let i = 0; i <= 1000; i++) {
+      const like = `like-${i}`;
+      localStorage.removeItem(like);
+    }
     setLoggedIn(false);
   }
 
@@ -102,6 +107,32 @@ function App() {
       })
       .finally(handleInfoTooltip)
   }
+
+  const [savedCards, setSavedCards] = useState([]);
+
+  function handleAddCardToSaved(allMovies) {
+    MainApi.createMovie(allMovies)
+      .then((newMovie) => {
+        const updatedAllMovies = {
+          ...allMovies,
+          movies: [...allMovies.movies, newMovie]
+        };
+        setSavedCards(updatedAllMovies);
+      })
+      .catch((error) => {
+        console.error('Ошибка при добавлении фильма:', error);
+      });
+  };
+
+  function handleRemoveCardFromSaved(deletedMovieId) {
+    MainApi.deleteMovie(deletedMovieId)
+      .then((deletedMovie) => {
+        setSavedCards(deletedMovie);
+      })
+      .catch((error) => {
+        console.error('Ошибка при удалении фильма:', error);
+      });
+  };
 
   function handleInfoTooltip() {
     setIsInfoTooltipPopupOpen(true);
@@ -154,10 +185,13 @@ function App() {
                   iconLink="/"
                   linkProfile="/profile"
                   loggedIn={loggedIn}
-                  />
+                />
                 <ProtectedRoute
                   element={Movies}
                   loggedIn={loggedIn}
+                  savedCards={savedCards}
+                  onAddCardToSaved={handleAddCardToSaved}
+                  onRemoveCardFromSaved={handleRemoveCardFromSaved}
                 />
                 <Footer />
               </>
@@ -174,6 +208,8 @@ function App() {
                 <ProtectedRoute
                   element={SavedMovies}
                   loggedIn={loggedIn}
+                  savedCards={savedCards}
+                  onRemoveCardFromSaved={handleRemoveCardFromSaved}
                 />
                 <Footer />
               </>

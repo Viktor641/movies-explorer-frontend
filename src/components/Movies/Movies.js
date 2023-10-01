@@ -102,6 +102,9 @@ function Movies(props) {
             cards={filterCards.slice(0, visibleCards)}
             errorMovie={errorMovie}
             loading={isLoading}
+            onAddCardToSaved={props.onAddCardToSaved}
+            onRemoveCardFromSaved={props.onRemoveCardFromSaved}
+            savedCards={props.savedCards}
           />
         )}
         {filterCards.length > visibleCards && (

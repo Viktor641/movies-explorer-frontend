@@ -35,13 +35,37 @@ export class Api {
       .then(res => { return this._checkResponse(res); })
   }
 
-  createMovie() {
+  createMovie(dataMovie) {
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this._baseUrl}/movies`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(dataMovie)
+    })
+      .then(res => { return this._checkResponse(res); })
+  }
+
+  deleteMovie(movieId) {
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
+      headers: {
+        authorization: `Bearer ${token}`
+      },
+      method: 'DELETE',
+    })
+      .then(res => { return this._checkResponse(res); })
+  }
+
+  getMovies() {
     const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/movies`, {
       headers: {
         authorization: `Bearer ${token}`
       },
-      method: 'POST',
+      method: 'GET',
     })
       .then(res => { return this._checkResponse(res); })
   }
