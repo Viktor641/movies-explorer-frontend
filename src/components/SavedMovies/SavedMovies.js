@@ -17,7 +17,7 @@ function SavedMovies(props) {
     MainApi.getMovies()
       .then((allMovies) => {
         setIsLoading(false);
-        setSavedCards(allMovies.movies);
+        setFilterSaveCards(allMovies.movies);
       })
       .catch((error) => {
         console.error('Ошибка при получении фильмов:', error);

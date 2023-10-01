@@ -1,7 +1,7 @@
 import '../SearchForm/SearchForm.css';
 import React, { useState } from 'react';
 import SearchIcon from '../../images/SearchIcon.svg'
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import FilterCheckboxSavedMovies from '../FilterCheckboxSavedMovies/FilterCheckboxSavedMovies';
 
 function SearchFormSavedMovies(props) {
   const [film, setFilm] = useState('');
@@ -50,7 +50,7 @@ function SearchFormSavedMovies(props) {
             <button type='submit' className='search__button'>Найти</button>
           </div>
         </div>
-        <FilterCheckbox onCheckboxChange={handleCheckboxChange} />
+        <FilterCheckboxSavedMovies onCheckboxChange={handleCheckboxChange} />
       </form>
     </section>
   )
