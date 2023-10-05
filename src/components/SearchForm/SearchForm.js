@@ -2,6 +2,7 @@ import './SearchForm.css';
 import React, { useState } from 'react';
 import SearchIcon from '../../images/SearchIcon.svg'
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import apiMovies from "../../utils/MoviesApi";
 
 function SearchForm(props) {
   const [film, setFilm] = useState('');
@@ -18,12 +19,41 @@ function SearchForm(props) {
 
     setError('');
 
-    const filterData = props.cards.filter(({ nameRU, nameEN, duration }) =>
-      (nameRU.toLowerCase().includes(film.toLowerCase()) || nameEN.toLowerCase().includes(film.toLowerCase())) && (!shortFilm || duration <= 40)
-    );
+    const isFirstSearch = localStorage.getItem('firstSearch') === 'false';
 
-    props.filterCards(filterData);
-    localStorage.setItem("filterData", JSON.stringify(filterData));
+    if (isFirstSearch) {
+      apiMovies.getCards()
+        .then((newCards) => {
+          props.setIsLoading(true);
+          localStorage.setItem('AllMovies', JSON.stringify(newCards));
+          const filterData = newCards.filter(({ nameRU, nameEN, duration }) =>
+            (nameRU.toLowerCase().includes(film.toLowerCase()) || nameEN.toLowerCase().includes(film.toLowerCase())) && (!shortFilm || duration <= 40)
+          );
+
+          props.filterCards(filterData);
+          localStorage.setItem("filterData", JSON.stringify(filterData));
+          localStorage.setItem('firstSearch', 'true');
+        })
+        .catch(() => {
+          props.setErrorMovie(`Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз`);
+        })
+        .finally(() => {
+          props.setIsLoading(false);
+        });
+    } else if(!isFirstSearch) {
+
+      props.setIsLoading(true);
+      const getAllMovies = localStorage.getItem('AllMovies');
+      const allMovies = JSON.parse(getAllMovies);
+
+      const filterData = allMovies.filter(({ nameRU, nameEN, duration }) =>
+        (nameRU.toLowerCase().includes(film.toLowerCase()) || nameEN.toLowerCase().includes(film.toLowerCase())) && (!shortFilm || duration <= 40)
+      );
+      
+      props.filterCards(filterData);
+      localStorage.setItem("filterData", JSON.stringify(filterData));
+      props.setIsLoading(false);
+    }
   }
 
   function handleFilmChange(evt) {
@@ -31,8 +61,20 @@ function SearchForm(props) {
     setError('');
   }
 
-  function handleCheckboxChange(checked) {
-    setShortFilm(checked);
+  function handleFilterChange(isChecked) {
+    setShortFilm(isChecked);
+
+    if (isChecked !== shortFilm) {
+      const getFilerData = localStorage.getItem('filterData');
+      const filerData = JSON.parse(getFilerData);
+    
+        const filterDataFil = filerData.filter(({ nameRU, nameEN, duration }) =>
+          (nameRU.toLowerCase().includes(film.toLowerCase()) || nameEN.toLowerCase().includes(film.toLowerCase())) && (!isChecked || duration <= 40)
+        );
+        localStorage.setItem("filterData", JSON.stringify(filterDataFil));
+
+        props.filterCards(filterDataFil);
+    }
   }
 
   return (
@@ -51,7 +93,7 @@ function SearchForm(props) {
             <button type='submit' className='search__button'>Найти</button>
           </div>
         </div>
-        <FilterCheckbox onCheckboxChange={handleCheckboxChange} />
+        <FilterCheckbox onCheckboxChange={handleFilterChange} isChecked={shortFilm} />
       </form>
     </section>
   )

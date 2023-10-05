@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Main from '../Main/Main';
 import Header from '../Header/Header';
@@ -44,10 +44,11 @@ function App() {
   function onRegister(name, email, password) {
     auth.register(name, email, password)
       .then((res) => {
+        onLogin(email, password)
         setInfoTooltipIcon(success);
+        localStorage.setItem('firstSearch', 'false');
         setInfoTooltipText("Вы успешно зарегистрировались!");
         setCurrentUser(res);
-        navigate("/signin");
       })
       .catch((err) => {
         setInfoTooltipIcon(failure);
@@ -63,7 +64,7 @@ function App() {
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            navigate()
+            navigate();
           }
         })
         .catch(console.error)
@@ -74,13 +75,16 @@ function App() {
     localStorage.removeItem("jwt");
     localStorage.removeItem("filterData");
     localStorage.removeItem("isChecked");
+    localStorage.removeItem("isCheckedSavedMovies");
+    localStorage.removeItem("savedMovies");
+    localStorage.removeItem("AllMovies");
+    localStorage.removeItem("firstSearch");
     for (let i = 0; i <= 1000; i++) {
       const like = `like-${i}`;
       localStorage.removeItem(like);
     }
     setLoggedIn(false);
   }
-
 
   useEffect(() => {
     MainApi.getUserData()
@@ -92,7 +96,6 @@ function App() {
         console.log(`Что-то пошло не так! Ошибка сервера ${err}`);
       })
   }, []);
-
 
   function handleUpdateProfileUser(profileData) {
     MainApi.sendUserData(profileData)
@@ -110,29 +113,19 @@ function App() {
 
   const [savedCards, setSavedCards] = useState([]);
 
-  function handleAddCardToSaved(allMovies) {
-    MainApi.createMovie(allMovies)
-      .then((newMovie) => {
-        const updatedAllMovies = {
-          ...allMovies,
-          movies: [...allMovies.movies, newMovie]
-        };
-        setSavedCards(updatedAllMovies);
-      })
-      .catch((error) => {
-        console.error('Ошибка при добавлении фильма:', error);
-      });
-  };
-
-  function handleRemoveCardFromSaved(deletedMovieId) {
+  function handleRemoveMovieCard(deletedMovieId) {
     MainApi.deleteMovie(deletedMovieId)
       .then((deletedMovie) => {
-        setSavedCards(deletedMovie);
+        updateSavedCards(deletedMovie);
       })
       .catch((error) => {
         console.error('Ошибка при удалении фильма:', error);
       });
   };
+
+  function updateSavedCards(newSavedCards) {
+    setSavedCards(newSavedCards);
+  }
 
   function handleInfoTooltip() {
     setIsInfoTooltipPopupOpen(true);
@@ -178,6 +171,7 @@ function App() {
               </>
             }
             />
+            
             <Route path='/movies' element={
               <>
                 <Header
@@ -190,13 +184,14 @@ function App() {
                   element={Movies}
                   loggedIn={loggedIn}
                   savedCards={savedCards}
-                  onAddCardToSaved={handleAddCardToSaved}
-                  onRemoveCardFromSaved={handleRemoveCardFromSaved}
+                  setSavedCards={setSavedCards}
+                  onRemoveCardMovieCard={handleRemoveMovieCard}
                 />
                 <Footer />
               </>
             }
             />
+
             <Route path='/saved-movies' element={
               <>
                 <Header
@@ -209,12 +204,14 @@ function App() {
                   element={SavedMovies}
                   loggedIn={loggedIn}
                   savedCards={savedCards}
-                  onRemoveCardFromSaved={handleRemoveCardFromSaved}
+                  setSavedCards={updateSavedCards}
+                  onRemoveCardMovieCard={handleRemoveMovieCard}
                 />
                 <Footer />
               </>
             }
             />
+
             <Route path='/profile' element={
               <>
                 <Header
@@ -232,22 +229,25 @@ function App() {
               </>
             }
             />
-            <Route path="*" element={
-              <>
-                <NotFound />
-              </>
-            }
+
+            <Route path="*" element={<NotFound />}
             />
-            <Route path='/signup' element={
-              <>
-                <Register onRegister={onRegister} />
-              </>
-            }
+
+            <Route path="/signup" element={
+                loggedIn ? (
+                  <Navigate to="/movies" />
+                ) : (
+                  <Register onRegister={onRegister} />
+                )
+              }
             />
-            <Route path='/signin' element={
-              <>
+
+            <Route path="/signin" element={
+              loggedIn ? (
+                <Navigate to="/movies" />
+              ) : (
                 <Login onLogin={onLogin} />
-              </>
+              )
             }
             />
           </Routes>

@@ -8,6 +8,16 @@ function SearchFormSavedMovies(props) {
   const [shortFilm, setShortFilm] = useState(false);
   const [error, setError] = useState('');
 
+  const handleFilterChange = (isChecked) => {
+    setShortFilm(isChecked);
+
+    const filterData = props.savedCards.filter(({ nameRU, nameEN, duration }) =>
+      (nameRU.toLowerCase().includes(film.toLowerCase()) || nameEN.toLowerCase().includes(film.toLowerCase())) && (!isChecked || duration <= 40)
+    );
+
+    props.filterSaveCards(filterData);
+  };
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -30,10 +40,6 @@ function SearchFormSavedMovies(props) {
     setError('');
   }
 
-  function handleCheckboxChange(checked) {
-    setShortFilm(checked);
-  }
-
   return (
     <section className='search'>
       <form className='search__form' onSubmit={handleSubmit}>
@@ -50,7 +56,7 @@ function SearchFormSavedMovies(props) {
             <button type='submit' className='search__button'>Найти</button>
           </div>
         </div>
-        <FilterCheckboxSavedMovies onCheckboxChange={handleCheckboxChange} />
+        <FilterCheckboxSavedMovies onCheckboxChange={handleFilterChange} isChecked={shortFilm} />
       </form>
     </section>
   )

@@ -6,9 +6,7 @@ import MainApi from "../../utils/MainApi";
 import Preloader from '../Preloader/Preloader';
 
 function SavedMovies(props) {
-  const [savedCards, setSavedCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  
   const [filterSaveCards, setFilterSaveCards] = useState([]);
 
   useEffect(() => {
@@ -18,16 +16,27 @@ function SavedMovies(props) {
       .then((allMovies) => {
         setIsLoading(false);
         setFilterSaveCards(allMovies.movies);
+        props.setSavedCards(allMovies.movies);
       })
       .catch((error) => {
         console.error('Ошибка при получении фильмов:', error);
       });
   }, []);
 
+  const getSavedMovies = localStorage.getItem('savedMovies')
+  const savedMovies = JSON.parse(getSavedMovies) || [];
+
   const handleRemoveCardFromSaved = (movieId) => {
     MainApi.deleteMovie(movieId)
       .then(() => {
-        setSavedCards((m) => m.filter((card) => card._id !== movieId));
+        const savedMoviesId = savedMovies.findIndex((card) => card.movieId);
+        localStorage.setItem(`like-${savedMovies[savedMoviesId].movieId}`, 'false');
+
+        const updatedSavedMovies = savedMovies.filter((movie) => movie._id !== movieId);
+        localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
+        setFilterSaveCards(updatedSavedMovies);
+
+        props.setSavedCards(updatedSavedMovies);
       })
       .catch((error) => {
         console.error('Ошибка при удалении фильма:', error);
@@ -41,14 +50,14 @@ function SavedMovies(props) {
   return (
     <main className='content'>
       <section className='saved-movies' >
-        <SearchFormSavedMovies savedCards={savedCards} filterSaveCards={filterData} />
+        <SearchFormSavedMovies savedCards={props.savedCards} filterSaveCards={filterData} />
         {isLoading && (
           <div className='saved-movies__container'>
             <Preloader />
           </div>
         )}
-        <div className={filterSaveCards.length === 0 ? 'saved-movies__container' : 'saved-movies__cards'}>
-          {filterSaveCards.length === 0 && !isLoading ? (
+        <div className={props.savedCards.length === 0 && filterSaveCards.length === 0 ? 'saved-movies__container' : 'saved-movies__cards'}>
+          {props.savedCards.length === 0 && filterSaveCards.length === 0 && !isLoading ? (
             <div className='saved-movies__error'>Ничего не найдено</div>
           ) : (
             filterSaveCards.map((movies, id) => (
@@ -58,7 +67,6 @@ function SavedMovies(props) {
                 name={movies.nameRU}
                 duration={movies.duration}
                 trailer={movies.trailerLink}
-                savedCards={savedCards}
                 onRemoveCardFromSaved={() => handleRemoveCardFromSaved(movies._id)}
               />
             ))
@@ -68,5 +76,4 @@ function SavedMovies(props) {
     </main>
   )
 }
-
 export default SavedMovies;

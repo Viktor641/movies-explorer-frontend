@@ -16,10 +16,23 @@ function Profile(props) {
 
   const [isEditing, setIsEditing] = useState(false);
 
+  const currentName = currentUser.name;
+  const currentEmail = currentUser.email;
+
+  const isNameChanged = values.name !== currentName;
+  const isEmailChanged = values.email !== currentEmail;
+
   useEffect(() => {
     setName(currentUser.name);
     setEmail(currentUser.email);
   }, [currentUser]);
+
+  useEffect(() => {
+    const isNameChanged = values.name !== currentName;
+    const isEmailChanged = values.email !== currentEmail;
+
+    setIsEditing(isNameChanged || isEmailChanged);
+  }, [values.name, values.email, currentName, currentEmail]);
 
   function handleSaveButton() {
     setSave(true);
@@ -28,6 +41,10 @@ function Profile(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (!isNameChanged && !isEmailChanged) {
+      return;
+    }
 
     props.onUpdateProfileUser({
       name: values.name,
@@ -57,9 +74,9 @@ function Profile(props) {
                 required
                 minLength={2}
                 maxLength={40}
-                value={values.name || '' || currentUser.name}
+                value={values.name || currentUser.name}
                 onChange={handleChange}
-                disabled={!isEditing}
+                disabled={!isSave ? isEditing : !isEditing}
               />
             </div>
           </div>
@@ -72,19 +89,19 @@ function Profile(props) {
                 type="email"
                 required
                 minLength={8}
-                value={values.email || email || ''}
+                value={values.email || currentUser.email}
                 onChange={handleChange}
-                disabled={!isEditing}
+                disabled={!isSave ? isEditing : !isEditing}
               />
             </div>
           </div>
           <div className='profile__container'>
             <span className='profile__error'>{isError || errors.email || errors.name}</span>
             {isSave ? (
-              <button type='submit' className='profile__save hover' disabled={!isValid}>Сохранить</button>
+              <button type='submit' className='profile__save hover' disabled={!isValid || !isEditing || (!isNameChanged && !isEmailChanged)}>Сохранить</button>
             ) :
               <>
-                <button type='submit' className='profile__change hover' onClick={handleSaveButton} disabled={isEditing}>Редактировать</button>
+                <button type='submit' className='profile__change hover' onClick={handleSaveButton}>Редактировать</button>
                 <Link to={'/'} className='profile__sign-out hover' onClick={props.onSignOut}>Выйти из аккаунта</Link>
               </>
             }

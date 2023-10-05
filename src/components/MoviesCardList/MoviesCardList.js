@@ -8,12 +8,11 @@ function MoviesCardList(props) {
   return (
     <section className={props.cards.length === 0 ? 'cards__container' : 'cards'}>
       {props.cards.length === 0 ? (
-        <div className='cards__error'>{props.errorMovie || 'Ничего не найдено'}</div>
+        <div className='cards__error'>{props.errorMovie || '' || props.isNotFound}</div>
       ) : (
         props.cards.map((card) => (
           <MoviesCard
             key={card.id}
-            movie={card.id._id}
             id={card.id}
             country={card.country}
             link={`${adressFilms}${card.image.url}`}
@@ -27,8 +26,8 @@ function MoviesCardList(props) {
             thumbnail={`${adressFilms}${card.image.url}`}
             movieId={card.id}
             savedCards={props.savedCards}
-            onAddCardToSaved={props.onAddCardToSaved}
-            onRemoveCardFromSaved={props.onRemoveCardFromSaved}
+            onRemoveCardMovieCard={props.onRemoveCardMovieCard}
+            setSavedCards={props.setSavedCards}
           />
         ))
       )}

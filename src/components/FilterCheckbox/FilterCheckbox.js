@@ -1,27 +1,21 @@
 import './FilterCheckbox.css';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 function FilterCheckbox(props) {
-  const [isChecked, setIsChecked] = useState(false);
+  const { isChecked, onCheckboxChange } = props;
 
-  const saveCheckboxState = (value) => {
-    localStorage.setItem('isChecked', String(value));
+  const handleCheckboxChange = () => {
+    const newValue = !isChecked;
+    onCheckboxChange(newValue);
+    localStorage.setItem('isChecked', newValue.toString());
   };
 
   useEffect(() => {
     const savedCheckboxState = localStorage.getItem('isChecked');
     if (savedCheckboxState === 'true') {
-      setIsChecked(true);
+      onCheckboxChange(true);
     }
-  }, []);
-
-  function handleCheckboxChange() {
-    const newCheckedState = !isChecked;
-    setIsChecked(newCheckedState);
-    saveCheckboxState(newCheckedState);
-  
-    props.onCheckboxChange(newCheckedState);
-  }
+  }, [onCheckboxChange]);
   
   return (
     <div className='search__toggle'>

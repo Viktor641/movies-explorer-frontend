@@ -1,28 +1,21 @@
-import '../FilterCheckbox/FilterCheckbox.css';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 function FilterCheckboxSavedMovies(props) {
-  const [isChecked, setIsChecked] = useState(false);
+  const { isChecked, onCheckboxChange } = props;
 
-  const saveCheckboxState = (value) => {
-    localStorage.setItem('isCheckedSavedMovies', String(value));
+  const handleCheckboxChange = () => {
+    const newValue = !isChecked;
+    onCheckboxChange(newValue);
+    localStorage.setItem('isCheckedSavedMovies', newValue.toString());
   };
 
   useEffect(() => {
     const savedCheckboxState = localStorage.getItem('isCheckedSavedMovies');
     if (savedCheckboxState === 'true') {
-      setIsChecked(true);
+      onCheckboxChange(true);
     }
-  }, []);
+  }, [onCheckboxChange]);
 
-  function handleCheckboxChange() {
-    const newCheckedState = !isChecked;
-    setIsChecked(newCheckedState);
-    saveCheckboxState(newCheckedState);
-  
-    props.onCheckboxChange(newCheckedState);
-  }
-  
   return (
     <div className='search__toggle'>
       <label className='search__label' aria-label="Короткометражки">

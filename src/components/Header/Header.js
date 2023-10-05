@@ -2,7 +2,7 @@ import './Header.css';
 import headerLogo from '../../images/headerLogo.svg';
 import AccountIcon from '../../images/AccountIcon.svg';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import PopupNavigation from '../PopupNavigation/PopupNavigation';
 
@@ -49,10 +49,10 @@ function Header(props) {
                   linkTextSave="/saved-movies"
                 />
                 <div className='header__container-account'>
-                  <Link to={'/profile'} className='header__account hover'>Аккаунт</Link>
-                  <Link to={props.linkProfile} className='header__cover'>
+                  <NavLink to={'/profile'} className='header__account hover'>Аккаунт</NavLink>
+                  <NavLink to={props.linkProfile} className='header__cover'>
                     <img src={AccountIcon} alt='Аккаунт-иконка' className='header__account-icon hover'></img>
-                  </Link>
+                  </NavLink>
                 </div>
               </>
             ) : (

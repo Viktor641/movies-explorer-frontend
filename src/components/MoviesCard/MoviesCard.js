@@ -26,7 +26,7 @@ function MoviesCard(props) {
 
     return result;
   }
-  
+
   function toggleLike() {
     setIsLiked(!isLiked);
 
@@ -44,25 +44,36 @@ function MoviesCard(props) {
       nameEN: props.nameEN,
     };
 
-    MainApi.getMovies()
-      .then((allMovies) => {
-        if (!isLiked) {
-          props.onAddCardToSaved(movieData);
-          setIsLiked(!isLiked);
-        } else {
-          const movieToDelete = allMovies.movies.find((movie) => movie.movieId === movieData.movieId);
-          if (movieToDelete) {
-            const movieIdToDelete = movieToDelete._id;
+    const getSavedMovies = localStorage.getItem('savedMovies')
+    const savedMovies = JSON.parse(getSavedMovies) || [];
 
-            props.onRemoveCardFromSaved(movieIdToDelete)
-            
-            setIsLiked(!isLiked);
-          }
-        }
-      })
-      .catch((error) => {
-        console.error('Ошибка при получении фильмов:', error);
-      });
+    if (!isLiked) {
+      MainApi.createMovie(movieData)
+        .then((newMovie) => {
+          const updatedAllMovies = [...savedMovies, newMovie];
+          localStorage.setItem('savedMovies', JSON.stringify(updatedAllMovies))
+          props.setSavedCards(updatedAllMovies);
+        })
+        .catch((error) => {
+          console.error('Ошибка при добавлении фильма:', error);
+        });
+      setIsLiked(!isLiked);
+    } else {
+      const movieToDelete = savedMovies.find((movie) => movie.movieId === movieData.movieId);
+      
+      if (movieToDelete) {
+        const movieIdToDelete = movieToDelete._id;
+        
+        const updatedSavedMovies = savedMovies.filter((movie) => movie._id !== movieIdToDelete);
+        localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
+        
+        props.setSavedCards(updatedSavedMovies);
+
+        props.onRemoveCardMovieCard(movieIdToDelete)
+
+        setIsLiked(!isLiked);
+      }
+    }
   }
 
   const cardLikeButtonClassName = (

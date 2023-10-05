@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import validator from 'validator';
 
 export function useFormWithValidation() {
   const [values, setValues] = useState({});
@@ -9,6 +10,15 @@ export function useFormWithValidation() {
     const target = event.target;
     const name = target.name;
     const value = target.value;
+
+    if (name === 'email') {
+      if (!validator.isEmail(value)) {
+        target.setCustomValidity('Некорректый адрес почты');
+      } else {
+        target.setCustomValidity('');
+      }
+    }
+
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
