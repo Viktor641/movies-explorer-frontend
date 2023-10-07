@@ -33,6 +33,7 @@ function App() {
         localStorage.setItem("jwt", res.token);
         setLoggedIn(true);
         localStorage.setItem('firstSearch', 'false');
+        setCurrentUser(res);
         navigate("/movies");
       })
       .catch(() => {
