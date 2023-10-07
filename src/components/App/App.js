@@ -31,6 +31,7 @@ function App() {
     auth.login(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
+        localStorage.setItem('firstSearch', 'false');
         setLoggedIn(true);
         navigate("/movies");
       })
@@ -44,9 +45,8 @@ function App() {
   function onRegister(name, email, password) {
     auth.register(name, email, password)
       .then((res) => {
-        onLogin(email, password)
+        onLogin(email, password);
         setInfoTooltipIcon(success);
-        localStorage.setItem('firstSearch', 'false');
         setInfoTooltipText("Вы успешно зарегистрировались!");
         setCurrentUser(res);
       })
@@ -95,7 +95,7 @@ function App() {
       .catch((err) => {
         console.log(`Что-то пошло не так! Ошибка сервера ${err}`);
       })
-  }, []);
+  }, [loggedIn]);
 
   function handleUpdateProfileUser(profileData) {
     MainApi.sendUserData(profileData)

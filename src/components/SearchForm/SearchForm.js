@@ -40,7 +40,7 @@ function SearchForm(props) {
         .finally(() => {
           props.setIsLoading(false);
         });
-    } else if(!isFirstSearch) {
+    } else if (!isFirstSearch) {
 
       props.setIsLoading(true);
       const getAllMovies = localStorage.getItem('AllMovies');
@@ -49,7 +49,7 @@ function SearchForm(props) {
       const filterData = allMovies.filter(({ nameRU, nameEN, duration }) =>
         (nameRU.toLowerCase().includes(film.toLowerCase()) || nameEN.toLowerCase().includes(film.toLowerCase())) && (!shortFilm || duration <= 40)
       );
-      
+
       props.filterCards(filterData);
       localStorage.setItem("filterData", JSON.stringify(filterData));
       props.setIsLoading(false);
@@ -63,18 +63,15 @@ function SearchForm(props) {
 
   function handleFilterChange(isChecked) {
     setShortFilm(isChecked);
-
-    if (isChecked !== shortFilm) {
-      const getFilerData = localStorage.getItem('filterData');
-      const filerData = JSON.parse(getFilerData);
     
-        const filterDataFil = filerData.filter(({ nameRU, nameEN, duration }) =>
-          (nameRU.toLowerCase().includes(film.toLowerCase()) || nameEN.toLowerCase().includes(film.toLowerCase())) && (!isChecked || duration <= 40)
-        );
-        localStorage.setItem("filterData", JSON.stringify(filterDataFil));
+    const getFilerData = localStorage.getItem('filterData');
+    const filerData = JSON.parse(getFilerData);
 
-        props.filterCards(filterDataFil);
-    }
+    const filterDataFil = filerData.filter(({ nameRU, nameEN, duration }) =>
+      (nameRU.toLowerCase().includes(film.toLowerCase()) || nameEN.toLowerCase().includes(film.toLowerCase())) && (!isChecked || duration <= 40)
+    );
+
+    props.filterCards(filterDataFil);
   }
 
   return (
