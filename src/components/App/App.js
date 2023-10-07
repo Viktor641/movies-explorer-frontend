@@ -31,8 +31,8 @@ function App() {
     auth.login(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
-        localStorage.setItem('firstSearch', 'false');
         setLoggedIn(true);
+        localStorage.setItem('firstSearch', 'false');
         navigate("/movies");
       })
       .catch(() => {
