@@ -85,6 +85,11 @@
   cursor: pointer;
 }
 
+.profile__change:disabled {
+  color: #F8F8F8;
+  opacity: 0.6;
+}
+
 .profile__sign-out {
   color: #EE3465;
   text-align: center;

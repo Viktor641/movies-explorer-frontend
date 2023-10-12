@@ -6,10 +6,9 @@ import { useFormWithValidation } from '../../utils/ValidationForm';
 
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, handleChange, errors, isValid, setValues } = useFormWithValidation();
 
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
 
   const [isSave, setSave] = useState(false);
   const [isError, setError] = useState(false);
@@ -23,16 +22,17 @@ function Profile(props) {
   const isEmailChanged = values.email !== currentEmail;
 
   useEffect(() => {
-    setName(currentUser.name);
-    setEmail(currentUser.email);
-  }, [currentUser]);
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
+  }, [currentUser, setValues]);
 
-  useEffect(() => {
-    const isNameChanged = values.name !== currentName;
-    const isEmailChanged = values.email !== currentEmail;
-
-    setIsEditing(isNameChanged || isEmailChanged);
-  }, [values.name, values.email, currentName, currentEmail]);
+  function handleNameKeyDown(e) {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  }
 
   function handleSaveButton() {
     setSave(true);
@@ -41,18 +41,16 @@ function Profile(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    if (!isNameChanged && !isEmailChanged) {
+    if (!isValid || !isEditing) {
       return;
     }
 
-    props.onUpdateProfileUser({
-      name: values.name,
-      email: values.email,
-    });
+    props.onUpdateProfileUser(values);
 
-    setSave(false);
+    setName(values.name);
+
     setIsEditing(false);
+    setSave(false);
 
     setTimeout(() => {
       setError(false);
@@ -62,7 +60,7 @@ function Profile(props) {
   return (
     <main className='content'>
       <section className='profile'>
-        <h1 className='profile__title'>Привет, {values.name || name}!</h1>
+        <h1 className='profile__title'>Привет, {currentUser.name || name}!</h1>
         <form className='profile__form' onSubmit={handleSubmit}>
           <div className='profile__name'>
             <div className='profile__info'>
@@ -76,6 +74,7 @@ function Profile(props) {
                 maxLength={40}
                 value={values.name || currentUser.name}
                 onChange={handleChange}
+                onKeyDown={handleNameKeyDown}
                 disabled={!isSave ? isEditing : !isEditing}
               />
             </div>
@@ -91,6 +90,7 @@ function Profile(props) {
                 minLength={8}
                 value={values.email || currentUser.email}
                 onChange={handleChange}
+                onKeyDown={handleNameKeyDown}
                 disabled={!isSave ? isEditing : !isEditing}
               />
             </div>

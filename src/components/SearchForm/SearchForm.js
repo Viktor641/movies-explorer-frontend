@@ -1,5 +1,5 @@
 import './SearchForm.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchIcon from '../../images/SearchIcon.svg'
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import apiMovies from "../../utils/MoviesApi";
@@ -16,6 +16,8 @@ function SearchForm(props) {
       setError('Нужно ввести ключевое слово');
       return;
     }
+
+    localStorage.setItem('searchTextMovie', film);
 
     setError('');
 
@@ -57,7 +59,9 @@ function SearchForm(props) {
   }
 
   function handleFilmChange(evt) {
-    setFilm(evt.target.value);
+    const newFilmValue = evt.target.value;
+    setFilm(newFilmValue);
+    localStorage.setItem('searchTextMovie', newFilmValue);
     setError('');
   }
 
@@ -73,6 +77,13 @@ function SearchForm(props) {
 
     props.filterCards(filterDataFil);
   }
+
+  useEffect(() => {
+    const savedTextMovie = localStorage.getItem('searchTextMovie');
+    if (savedTextMovie) {
+      setFilm(savedTextMovie);
+    }
+  }, []);
 
   return (
     <section className='search'>

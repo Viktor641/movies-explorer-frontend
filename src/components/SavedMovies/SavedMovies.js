@@ -12,15 +12,23 @@ function SavedMovies(props) {
   useEffect(() => {
     setIsLoading(true);
 
-    MainApi.getMovies()
-      .then((allMovies) => {
-        setIsLoading(false);
-        setFilterSaveCards(allMovies.movies);
-        props.setSavedCards(allMovies.movies);
-      })
-      .catch((error) => {
-        console.error('Ошибка при получении фильмов:', error);
-      });
+    const filterDataSavedMovies = localStorage.getItem('filterDataSavedMovies');
+    if (filterDataSavedMovies && ![]) {
+      const filteredMovies = JSON.parse(filterDataSavedMovies);
+      setFilterSaveCards(filteredMovies);
+      setIsLoading(false);
+    } else {
+      MainApi.getMovies()
+        .then((allMovies) => {
+          console.log(allMovies.movies);
+          setIsLoading(false);
+          localStorage.setItem('savedMovies', JSON.stringify(allMovies.movies));
+          setFilterSaveCards(allMovies.movies);
+        })
+        .catch((error) => {
+          console.error('Ошибка при получении фильмов:', error);
+        });
+    }
   }, []);
 
   const getSavedMovies = localStorage.getItem('savedMovies')
@@ -29,14 +37,13 @@ function SavedMovies(props) {
   const handleRemoveCardFromSaved = (movieId) => {
     MainApi.deleteMovie(movieId)
       .then(() => {
-        const savedMoviesId = savedMovies.findIndex((card) => card.movieId);
+        const savedMoviesId = filterSaveCards.findIndex((card) => card.movieId);
         localStorage.setItem(`like-${savedMovies[savedMoviesId].movieId}`, 'false');
 
-        const updatedSavedMovies = savedMovies.filter((movie) => movie._id !== movieId);
+        const updatedSavedMovies = filterSaveCards.filter((movie) => movie._id !== movieId);
         localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
+        localStorage.setItem('filterDataSavedMovies', JSON.stringify(updatedSavedMovies));
         setFilterSaveCards(updatedSavedMovies);
-
-        props.setSavedCards(updatedSavedMovies);
       })
       .catch((error) => {
         console.error('Ошибка при удалении фильма:', error);

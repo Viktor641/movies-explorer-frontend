@@ -82,7 +82,6 @@ function Movies(props) {
     } else {
       setIsNotFound('');
     }
-
   }, []);
 
   return (

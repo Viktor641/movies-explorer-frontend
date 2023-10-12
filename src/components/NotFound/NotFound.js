@@ -1,9 +1,12 @@
 import './NotFound.css';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function NotFound() {
+  const navigate = useNavigate();
+
   const handleHistoryBack = () => {
-    window.history.back();
+    navigate(-2);
   };
 
   return (

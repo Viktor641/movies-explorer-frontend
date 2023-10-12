@@ -47,12 +47,13 @@ function MoviesCard(props) {
     const getSavedMovies = localStorage.getItem('savedMovies')
     const savedMovies = JSON.parse(getSavedMovies) || [];
 
-    if (!isLiked) {
+    const isMovieAlreadyAdded = savedMovies.find((movie) => movie.movieId === movieData.movieId);
+
+    if (!isLiked && !isMovieAlreadyAdded) {
       MainApi.createMovie(movieData)
         .then((newMovie) => {
           const updatedAllMovies = [...savedMovies, newMovie];
           localStorage.setItem('savedMovies', JSON.stringify(updatedAllMovies))
-          props.setSavedCards(updatedAllMovies);
         })
         .catch((error) => {
           console.error('Ошибка при добавлении фильма:', error);
@@ -60,14 +61,13 @@ function MoviesCard(props) {
       setIsLiked(!isLiked);
     } else {
       const movieToDelete = savedMovies.find((movie) => movie.movieId === movieData.movieId);
-      
+
       if (movieToDelete) {
         const movieIdToDelete = movieToDelete._id;
-        
+
         const updatedSavedMovies = savedMovies.filter((movie) => movie._id !== movieIdToDelete);
         localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
-        
-        props.setSavedCards(updatedSavedMovies);
+        localStorage.setItem('searchTextMovie', JSON.stringify(updatedSavedMovies));
 
         props.onRemoveCardMovieCard(movieIdToDelete)
 

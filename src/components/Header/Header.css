@@ -137,6 +137,11 @@
   display: none;
 }
 
+.active {
+  font-weight: bold;
+  color: #EE3465;
+}
+
 @media screen and (max-width: 768px) {
   .header {
     padding: 17px 0;

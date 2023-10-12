@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Main from '../Main/Main';
 import Header from '../Header/Header';
@@ -58,14 +58,17 @@ function App() {
       .finally(handleInfoTooltip)
   }
 
+  const location = useLocation();
+  const path = location.pathname;
+
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    if (jwt) {
+    if (jwt && path !== '*') {
       auth.getToken(jwt)
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            navigate();
+            navigate(path);
           }
         })
         .catch(console.error)
@@ -80,6 +83,9 @@ function App() {
     localStorage.removeItem("savedMovies");
     localStorage.removeItem("AllMovies");
     localStorage.removeItem("firstSearch");
+    localStorage.removeItem("filterDataSavedMovies");
+    localStorage.removeItem("searchTextSavedMovie");
+    localStorage.removeItem("searchTextMovie");
     for (let i = 0; i <= 1000; i++) {
       const like = `like-${i}`;
       localStorage.removeItem(like);
@@ -90,6 +96,7 @@ function App() {
   useEffect(() => {
     MainApi.getUserData()
       .then((data) => {
+        console.log(data.user);
         setCurrentUser(data.user);
         setLoggedIn(true);
       })
@@ -101,9 +108,18 @@ function App() {
   function handleUpdateProfileUser(profileData) {
     MainApi.sendUserData(profileData)
       .then((user) => {
+        console.log(user);
         setInfoTooltipIcon(success);
         setInfoTooltipText("Вы успешно обновили профиль!");
         setCurrentUser(user);
+        MainApi.getUserData()
+          .then((data) => {
+            setCurrentUser(data.user);
+            setLoggedIn(true);
+          })
+          .catch((err) => {
+            console.log(`Что-то пошло не так! Ошибка сервера ${err}`);
+          });
       })
       .catch(() => {
         setInfoTooltipIcon(failure);
@@ -172,7 +188,7 @@ function App() {
               </>
             }
             />
-            
+
             <Route path='/movies' element={
               <>
                 <Header
@@ -235,12 +251,12 @@ function App() {
             />
 
             <Route path="/signup" element={
-                loggedIn ? (
-                  <Navigate to="/movies" />
-                ) : (
-                  <Register onRegister={onRegister} />
-                )
-              }
+              loggedIn ? (
+                <Navigate to="/movies" />
+              ) : (
+                <Register onRegister={onRegister} />
+              )
+            }
             />
 
             <Route path="/signin" element={

@@ -24,5 +24,5 @@ export function useFormWithValidation() {
     setIsValid(target.closest("form").checkValidity());
   };
 
-  return { values, handleChange, errors, isValid };
+  return { values, handleChange, errors, isValid, setValues };
 }
