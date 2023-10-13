@@ -11,10 +11,13 @@ function SearchFormSavedMovies(props) {
   const getSavedMovies = localStorage.getItem('savedMovies')
   const savedMovies = JSON.parse(getSavedMovies) || [];
 
+  const getFilterDataSavedMovies = localStorage.getItem('filterDataSavedMovies')
+  const filterDataSavedMovies = JSON.parse(getFilterDataSavedMovies) || [];
+
   const handleFilterChange = (isChecked) => {
     setShortFilm(isChecked);
 
-    const filterData = savedMovies.filter(({ nameRU, nameEN, duration }) =>
+    const filterData = filterDataSavedMovies.filter(({ nameRU, nameEN, duration }) =>
       (nameRU.toLowerCase().includes(film.toLowerCase()) || nameEN.toLowerCase().includes(film.toLowerCase())) && (!isChecked || duration <= 40)
     );
 

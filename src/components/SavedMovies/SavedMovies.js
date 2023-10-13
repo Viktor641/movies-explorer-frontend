@@ -13,8 +13,9 @@ function SavedMovies(props) {
     setIsLoading(true);
 
     const filterDataSavedMovies = localStorage.getItem('filterDataSavedMovies');
-    if (filterDataSavedMovies || ![]) {
-      const filteredMovies = JSON.parse(filterDataSavedMovies);
+    const filteredMovies = JSON.parse(filterDataSavedMovies);
+    console.log(filteredMovies);
+    if (filteredMovies) {
       setFilterSaveCards(filteredMovies);
       setIsLoading(false);
     } else {
@@ -22,7 +23,7 @@ function SavedMovies(props) {
         .then((allMovies) => {
           console.log(allMovies.movies);
           setIsLoading(false);
-          localStorage.setItem('savedMovies', JSON.stringify(allMovies.movies));
+
           setFilterSaveCards(allMovies.movies);
         })
         .catch((error) => {
@@ -67,7 +68,7 @@ function SavedMovies(props) {
           {props.savedCards.length === 0 && filterSaveCards.length === 0 && !isLoading ? (
             <div className='saved-movies__error'>Ничего не найдено</div>
           ) : (
-            savedMovies.map((movies, id) => (
+            filterSaveCards.map((movies, id) => (
               <MoviesCard
                 key={id}
                 link={movies.image}
