@@ -96,7 +96,6 @@ function App() {
   useEffect(() => {
     MainApi.getUserData()
       .then((data) => {
-        console.log(data.user);
         setCurrentUser(data.user);
         setLoggedIn(true);
       })
@@ -108,7 +107,6 @@ function App() {
   function handleUpdateProfileUser(profileData) {
     MainApi.sendUserData(profileData)
       .then((user) => {
-        console.log(user);
         setInfoTooltipIcon(success);
         setInfoTooltipText("Вы успешно обновили профиль!");
         setCurrentUser(user);

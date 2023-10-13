@@ -13,7 +13,7 @@ function SavedMovies(props) {
     setIsLoading(true);
 
     const filterDataSavedMovies = localStorage.getItem('filterDataSavedMovies');
-    if (filterDataSavedMovies && ![]) {
+    if (filterDataSavedMovies || ![]) {
       const filteredMovies = JSON.parse(filterDataSavedMovies);
       setFilterSaveCards(filteredMovies);
       setIsLoading(false);
@@ -37,7 +37,7 @@ function SavedMovies(props) {
   const handleRemoveCardFromSaved = (movieId) => {
     MainApi.deleteMovie(movieId)
       .then(() => {
-        const savedMoviesId = filterSaveCards.findIndex((card) => card.movieId);
+        const savedMoviesId = filterSaveCards.findIndex((movie) => movie._id === movieId);
         localStorage.setItem(`like-${savedMovies[savedMoviesId].movieId}`, 'false');
 
         const updatedSavedMovies = filterSaveCards.filter((movie) => movie._id !== movieId);
@@ -67,7 +67,7 @@ function SavedMovies(props) {
           {props.savedCards.length === 0 && filterSaveCards.length === 0 && !isLoading ? (
             <div className='saved-movies__error'>Ничего не найдено</div>
           ) : (
-            filterSaveCards.map((movies, id) => (
+            savedMovies.map((movies, id) => (
               <MoviesCard
                 key={id}
                 link={movies.image}

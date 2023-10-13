@@ -6,7 +6,7 @@ function NotFound() {
   const navigate = useNavigate();
 
   const handleHistoryBack = () => {
-    navigate(-2);
+    navigate(-3);
   };
 
   return (

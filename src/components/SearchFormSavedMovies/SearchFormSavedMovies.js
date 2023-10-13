@@ -50,7 +50,7 @@ function SearchFormSavedMovies(props) {
   }
 
   useEffect(() => {
-    const savedTextMovie = localStorage.getItem('searchTextSavedMovie');
+    const savedTextMovie = localStorage.getItem('searchTextSavedMovie') || [];
     if (savedTextMovie) {
       setFilm(savedTextMovie);
     }
