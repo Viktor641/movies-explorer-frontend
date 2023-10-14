@@ -1,5 +1,5 @@
 import '../SearchForm/SearchForm.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchIcon from '../../images/SearchIcon.svg'
 import FilterCheckboxSavedMovies from '../FilterCheckboxSavedMovies/FilterCheckboxSavedMovies';
 
@@ -32,15 +32,12 @@ function SearchFormSavedMovies(props) {
       return;
     }
 
-    localStorage.setItem('searchTextSavedMovie', film);
-
     setError('');
 
     const filterData = savedMovies.filter(({ nameRU, nameEN, duration }) =>
       (nameRU.toLowerCase().includes(film.toLowerCase()) || nameEN.toLowerCase().includes(film.toLowerCase())) && (!shortFilm || duration <= 40)
     );
 
-    localStorage.setItem('searchTextSavedMovie', film);
     props.filterSaveCards(filterData);
     localStorage.setItem("filterDataSavedMovies", JSON.stringify(filterData));
   }
@@ -48,16 +45,8 @@ function SearchFormSavedMovies(props) {
   function handleFilmChange(evt) {
     const newFilmValue = evt.target.value;
     setFilm(newFilmValue);
-    localStorage.setItem('searchTextSavedMovie', newFilmValue);
     setError('');
   }
-
-  useEffect(() => {
-    const savedTextMovie = localStorage.getItem('searchTextSavedMovie') || [];
-    if (savedTextMovie) {
-      setFilm(savedTextMovie);
-    }
-  }, []);
 
   return (
     <section className='search'>

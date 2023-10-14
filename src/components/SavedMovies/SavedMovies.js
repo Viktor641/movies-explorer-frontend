@@ -12,24 +12,16 @@ function SavedMovies(props) {
   useEffect(() => {
     setIsLoading(true);
 
-    const filterDataSavedMovies = localStorage.getItem('filterDataSavedMovies');
-    const filteredMovies = JSON.parse(filterDataSavedMovies);
-    console.log(filteredMovies);
-    if (filteredMovies) {
-      setFilterSaveCards(filteredMovies);
-      setIsLoading(false);
-    } else {
-      MainApi.getMovies()
-        .then((allMovies) => {
-          console.log(allMovies.movies);
-          setIsLoading(false);
+    MainApi.getMovies()
+      .then((allMovies) => {
+        console.log(allMovies.movies);
+        setIsLoading(false);
 
-          setFilterSaveCards(allMovies.movies);
-        })
-        .catch((error) => {
-          console.error('Ошибка при получении фильмов:', error);
-        });
-    }
+        setFilterSaveCards(allMovies.movies);
+      })
+      .catch((error) => {
+        console.error('Ошибка при получении фильмов:', error);
+      });
   }, []);
 
   const getSavedMovies = localStorage.getItem('savedMovies')
@@ -43,7 +35,6 @@ function SavedMovies(props) {
 
         const updatedSavedMovies = filterSaveCards.filter((movie) => movie._id !== movieId);
         localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
-        localStorage.setItem('filterDataSavedMovies', JSON.stringify(updatedSavedMovies));
         setFilterSaveCards(updatedSavedMovies);
       })
       .catch((error) => {
