@@ -20,7 +20,7 @@ import success from "../../images/SuccessIcon.jpg";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(!!localStorage.getItem('jwt'));
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
   const [infoTooltipIcon, setInfoTooltipIcon] = useState('');
   const [infoTooltipText, setInfoTooltipText] = useState('');
@@ -68,7 +68,6 @@ function App() {
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            navigate(path);
           }
         })
         .catch(console.error)

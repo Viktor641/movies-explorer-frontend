@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 function FilterCheckboxSavedMovies(props) {
   const { isChecked, onCheckboxChange } = props;
@@ -6,15 +6,7 @@ function FilterCheckboxSavedMovies(props) {
   const handleCheckboxChange = () => {
     const newValue = !isChecked;
     onCheckboxChange(newValue);
-    localStorage.setItem('isCheckedSavedMovies', newValue.toString());
   };
-
-  useEffect(() => {
-    const savedCheckboxState = localStorage.getItem('isCheckedSavedMovies');
-    if (savedCheckboxState === 'true') {
-      onCheckboxChange(true);
-    }
-  }, [onCheckboxChange]);
 
   return (
     <div className='search__toggle'>

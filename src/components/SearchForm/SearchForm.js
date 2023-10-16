@@ -3,11 +3,29 @@ import React, { useState, useEffect } from 'react';
 import SearchIcon from '../../images/SearchIcon.svg'
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import apiMovies from "../../utils/MoviesApi";
+import MainApi from "../../utils/MainApi";
 
 function SearchForm(props) {
   const [film, setFilm] = useState('');
   const [shortFilm, setShortFilm] = useState(false);
   const [error, setError] = useState('');
+
+  const [isFirstSubmit, setIsFirstSubmit] = useState(false);
+
+  useEffect(() => {
+    if (isFirstSubmit) {
+      MainApi.getMovies()
+        .then((allMovies) => {
+          allMovies.movies.forEach((movie) => {
+            localStorage.setItem(`like-${movie.movieId}`, 'true');
+          });
+
+        })
+        .catch((error) => {
+          console.error('Ошибка при получении фильмов:', error);
+        });
+    }
+  }, [isFirstSubmit])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,14 +34,15 @@ function SearchForm(props) {
       setError('Нужно ввести ключевое слово');
       return;
     }
-
+    
     localStorage.setItem('searchTextMovie', film);
-
+    
     setError('');
-
+    
     const isFirstSearch = localStorage.getItem('firstSearch') === 'false';
-
+    
     if (isFirstSearch) {
+      setIsFirstSubmit(true);
       apiMovies.getCards()
         .then((newCards) => {
           props.setIsLoading(true);
@@ -67,7 +86,7 @@ function SearchForm(props) {
 
   function handleFilterChange(isChecked) {
     setShortFilm(isChecked);
-    
+
     const getFilerData = localStorage.getItem('filterData');
     const filerData = JSON.parse(getFilerData);
 

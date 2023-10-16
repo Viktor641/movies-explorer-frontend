@@ -8,7 +8,7 @@ function MoviesCardList(props) {
   return (
     <section className={props.cards.length === 0 ? 'cards__container' : 'cards'}>
       {props.cards.length === 0 ? (
-        <div className='cards__error'>{props.errorMovie || '' || props.isNotFound}</div>
+        <div className='cards__error'>{props.errorMovie || props.isNotFound}</div>
       ) : (
         props.cards.map((card) => (
           <MoviesCard

@@ -54,7 +54,9 @@ function MoviesCard(props) {
           .then((newMovie) => {
             const updatedAllMovies = [...savedMovies, newMovie];
             localStorage.setItem('savedMovies', JSON.stringify(updatedAllMovies))
-            localStorage.setItem('filterDataSavedMovies', JSON.stringify(updatedAllMovies));
+            savedMovies.forEach((movie) => {
+              localStorage.setItem(`like-${movie.movieId}`, 'true');
+            });
           })
           .catch((error) => {
             console.error('Ошибка при добавлении фильма:', error);
@@ -68,7 +70,6 @@ function MoviesCard(props) {
 
         const updatedSavedMovies = savedMovies.filter((movie) => movie._id !== movieIdToDelete);
         localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
-        localStorage.setItem('filterDataSavedMovies', JSON.stringify(updatedSavedMovies));
 
         props.onRemoveCardMovieCard(movieIdToDelete)
 

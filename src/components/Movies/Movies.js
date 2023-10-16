@@ -74,6 +74,7 @@ function Movies(props) {
     const localStorageMovies = localStorage.getItem('filterData');
     const filteredMovies = JSON.parse(localStorageMovies);
     if (filteredMovies) {
+
       setCards(filteredMovies);
       setFilterCards(filteredMovies);
       if(filteredMovies.length === 0) {

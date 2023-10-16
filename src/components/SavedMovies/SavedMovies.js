@@ -14,10 +14,14 @@ function SavedMovies(props) {
 
     MainApi.getMovies()
       .then((allMovies) => {
-        console.log(allMovies.movies);
         setIsLoading(false);
-
+        localStorage.setItem('savedMovies', JSON.stringify(allMovies.movies));
         setFilterSaveCards(allMovies.movies);
+        
+        allMovies.movies.forEach((movie) => {
+          localStorage.setItem(`like-${movie.movieId}`, 'true');
+        });
+
       })
       .catch((error) => {
         console.error('Ошибка при получении фильмов:', error);
@@ -30,7 +34,7 @@ function SavedMovies(props) {
   const handleRemoveCardFromSaved = (movieId) => {
     MainApi.deleteMovie(movieId)
       .then(() => {
-        const savedMoviesId = filterSaveCards.findIndex((movie) => movie._id === movieId);
+        const savedMoviesId = savedMovies.findIndex((movie) => movie._id === movieId);
         localStorage.setItem(`like-${savedMovies[savedMoviesId].movieId}`, 'false');
 
         const updatedSavedMovies = filterSaveCards.filter((movie) => movie._id !== movieId);
@@ -55,7 +59,7 @@ function SavedMovies(props) {
             <Preloader />
           </div>
         )}
-        <div className={props.savedCards.length === 0 && filterSaveCards.length === 0 ? 'saved-movies__container' : 'saved-movies__cards'}>
+        <div className={props.savedCards.length === 0 && filterSaveCards.length === 0 && !isLoading ? 'saved-movies__container' : 'saved-movies__cards'}>
           {props.savedCards.length === 0 && filterSaveCards.length === 0 && !isLoading ? (
             <div className='saved-movies__error'>Ничего не найдено</div>
           ) : (
