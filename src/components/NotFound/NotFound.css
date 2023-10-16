@@ -37,6 +37,7 @@
   width: 42px;
   height: 17px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .notFound__button-back:hover {

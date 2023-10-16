@@ -1,22 +1,13 @@
-import './FilterCheckbox.css';
-import React, { useEffect } from 'react';
+import React from 'react';
 
-function FilterCheckbox(props) {
+function FilterCheckboxSavedMovies(props) {
   const { isChecked, onCheckboxChange } = props;
 
   const handleCheckboxChange = () => {
     const newValue = !isChecked;
     onCheckboxChange(newValue);
-    localStorage.setItem('isChecked', newValue.toString());
   };
 
-  useEffect(() => {
-    const savedCheckboxState = localStorage.getItem('isChecked');
-    if (savedCheckboxState === 'true') {
-      onCheckboxChange(true);
-    }
-  }, [onCheckboxChange]);
-  
   return (
     <div className='search__toggle'>
       <label className='search__label' aria-label="Короткометражки">
@@ -33,4 +24,4 @@ function FilterCheckbox(props) {
   )
 }
 
-export default FilterCheckbox;
+export default FilterCheckboxSavedMovies;

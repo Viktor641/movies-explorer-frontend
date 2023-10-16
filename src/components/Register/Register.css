@@ -42,7 +42,11 @@
   border: none;
   border-bottom: 1px solid rgb(66, 66, 66);
   padding-bottom: 9px;
-  margin-bottom: 24px;
+}
+
+.register__input:focus {
+  border-color: #0078d4;
+  box-shadow: 0 0 8px #0078d4;
 }
 
 .register__input:nth-child(3n) {
@@ -56,6 +60,7 @@
   font-weight: 400;
   line-height: normal;
   margin-top: 6px;
+  height: 24px;
 }
 
 .register__button {
@@ -70,6 +75,11 @@
   max-width: 396px;
   height: 45px;
   cursor: pointer;
+}
+
+.register__button:disabled {
+  background-color: #F8F8F8;
+  color: #C2C2C2;
 }
 
 .register__button_type_signin {
